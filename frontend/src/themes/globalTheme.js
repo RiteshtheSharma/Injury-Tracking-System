@@ -5,6 +5,7 @@ const theme = {
         size: "18px",
         height: "20px",
       },
+      
     },
   }; 
   export default theme;

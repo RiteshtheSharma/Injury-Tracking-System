@@ -24,7 +24,7 @@ body{
 
 /* style for parent element of navigationBar */
 
-:root > * {
+#root > * {
 display:flex;
 flex-direction: column;
 }

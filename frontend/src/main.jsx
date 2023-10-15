@@ -7,7 +7,7 @@ import { Grommet } from "grommet";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Router>
-      <Grommet theme={theme} full>
+      <Grommet theme={theme} full style={{display:"flex",flexDirection:"column"}}>
 
         <App />
       </Grommet>
