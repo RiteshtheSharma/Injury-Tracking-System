@@ -1,22 +1,27 @@
+import NavigationBar from "./components/NavigationBar";
 
-import NavigationBar from './components/NavigationBar';
-import { Grommet } from 'grommet';
-import AuthComp from './components/AuthComp';
-import theme from './themes/globalTheme';
-import SignInForm from './components/SignInForm';
+import AuthComp from "./components/AuthComp";
+
+import SignInForm from "./components/SignInForm";
+import { Route, Routes } from "react-router-dom";
 function App() {
-
-
   return (
     <>
-    <Grommet theme={theme}  full>
-     <NavigationBar/>
-     <AuthComp type={"Sign In"}  >
-     <SignInForm/>
-     </AuthComp>
-     </Grommet>
+      
+        <NavigationBar />
+        <Routes>
+        <Route path="login" element={
+         <AuthComp type={"Sign In"}>
+            <LogInForm />
+          </AuthComp>} />
+        <Route path="signin" element={ <AuthComp type={"Sign In"}>
+            <SignInForm />
+          </AuthComp>} />
+         
+        </Routes>
+   
     </>
-  )
+  );
 }
 
-export default App
+export default App;
