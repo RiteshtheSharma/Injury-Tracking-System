@@ -3,7 +3,7 @@ import NavigationBar from './components/NavigationBar';
 import { Grommet } from 'grommet';
 import AuthComp from './components/AuthComp';
 import theme from './themes/globalTheme';
-
+import SignInForm from './components/SignInForm';
 function App() {
 
 
@@ -11,7 +11,9 @@ function App() {
     <>
     <Grommet theme={theme}  full>
      <NavigationBar/>
-     <AuthComp type={"Sign In"} authFormComp={} googleAuthFunc={}/>
+     <AuthComp type={"Sign In"}  >
+     <SignInForm/>
+     </AuthComp>
      </Grommet>
     </>
   )

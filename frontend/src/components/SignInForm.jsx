@@ -1,6 +1,7 @@
 import {TextInput,Button} from 'grommet'
-const handleSubmit=()=>{}
+
 const SignInForm = () => {
+    const handleSubmit=()=>alert('test')
   return (
     <form onSubmit={handleSubmit}>
     <TextInput type="email" placeholder="Email" />
