@@ -1,12 +1,14 @@
 import NavigationBar from "./components/NavigationBar";
-
+import { AuthProvider } from "./components/Context/AuthContext";
 import AuthComp from "./components/AuthComp";
 import LogInForm from "./components/LoginForm";
 import SignInForm from "./components/SignInForm";
 import { Route, Routes } from "react-router-dom";
+import { RequireAuth } from "./components/RequireAuth";
+import Profile from "./components/Profile"
 function App() {
   return (
-    <>
+    <AuthProvider>
       
         <NavigationBar />
         <Routes>
@@ -17,10 +19,17 @@ function App() {
         <Route path="signin" element={ <AuthComp type={"Sign In"}>
             <SignInForm />
           </AuthComp>} />
-         
+          <Route
+            path="profile"
+            element={
+              <RequireAuth>
+                <Profile />
+               </RequireAuth>
+            }
+          />
         </Routes>
    
-    </>
+    </AuthProvider>
   );
 }
 
