@@ -6,6 +6,7 @@ import SignInForm from "./components/SignInForm";
 import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "./components/RequireAuth";
 import Profile from "./components/Profile"
+import Logout from "./components/Logout";
 function App() {
   return (
     <AuthProvider>
@@ -27,8 +28,9 @@ function App() {
                </RequireAuth>
             }
           />
+           <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
         </Routes>
-   
+     
     </AuthProvider>
   );
 }

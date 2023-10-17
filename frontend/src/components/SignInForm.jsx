@@ -13,7 +13,7 @@ const SignInForm = () => {
   const redirectPath = location.state?.path || "/";
   const handleSubmit = () => {
     if(pwd===confirmPwd){
-    auth.signin(userName,Email,pwd);
+    auth.signin(username,Email,pwd);
     navigate(redirectPath, { replace: true });}
     else alert("Password must match with confirm password");
   };
@@ -22,7 +22,7 @@ const SignInForm = () => {
     <TextInput type="username" placeholder="User Name" value={username} onChange={(e)=>setusername(e.target.value)}/>
     <TextInput type="email" placeholder="Email" value={Email} onChange={(e)=>setEmail(e.target.value)}/>
     <TextInput type="password" placeholder="Password" value={pwd} onChange={(e)=>setpwd(e.target.value)}/>
-    <TextInput type="confirmpassword" placeholder="Confirm Password" value={confirmPwd} onChange={(e)=>setconfirmPwd(e.target.value)}/>
+    <TextInput type="password" placeholder="Confirm Password" value={confirmPwd} onChange={(e)=>setconfirmPwd(e.target.value)}/>
     <Button type="submit" label="Sign In" primary style={{borderRadius:"5px", width:"100%"}}/>
   </form>
   )
