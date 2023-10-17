@@ -1,11 +1,11 @@
-import { Box, Button, Header, } from 'grommet';
+import { Box, Button, Header,ResponsiveContext  } from 'grommet';
 import { useNavigate } from "react-router-dom"; 
 import { useAuth } from './Context/AuthContext';
 import {UserSettings} from 'grommet-icons'
 const NavigationBar = () => {
   const navigate = useNavigate();
   const auth = useAuth();
-  console.log(typeof auth.user ,typeof localStorage.getItem('user'),"auth user")
+  alert("auth.user:"+auth.user.length+typeof(auth.user)+",loccalstorage:"+localStorage.getItem('user')+auth.user+typeof(auth.user))
   return (
 
     <Header background="light-2" pad="medium">
@@ -13,7 +13,7 @@ const NavigationBar = () => {
        ITS
     </Box>
     
-    {!auth.user ? <Box direction="row" align="center" gap="medium"> <Button  label="Login" onClick={()=>{navigate('login')}} />
+    {auth.user<1 ? <Box direction="row" align="center" gap="medium"> <Button  label="Login" onClick={()=>{navigate('login')}} />
       <Button  label="Sign In"  onClick={()=>{navigate('signin')}}/></Box>
      
     :<><Box direction="row" align="center" gap="medium"> 
