@@ -32,6 +32,8 @@ function App() {
             }
           />
            <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
+           <Route path="newreport" element={<>{"newreport"}</>} />
+           <Route path="settings" element={<>{"settings"}</>} />
         </Routes></>
      
   

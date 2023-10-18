@@ -10,14 +10,16 @@ const NavMenu = ({children}) => {
     setOpen(false);
   };
   return (
-    <Box align="center" pad="large">
+    <Box align="center" pad="small">
     <DropButton
       icon={<Menu/>}
       open={open}
       onOpen={onOpen}
       onClose={onClose}
       dropContent={children}
-      dropProps={{ children }}
+      dropProps={{ top: 'bottom' }}
+      dropAlign={{top:"bottom"}}
+      a11yTitle="Dropdown for navigation options"
     />
   </Box>
   )

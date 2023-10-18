@@ -12,7 +12,9 @@ const NavBtnGrpAfterAuth = () => {
         navigate("profile");
       }}
     />
-    <Button label="New report" />
+    <Button label="New report" onClick={() => {
+        navigate("newreport");
+      }} />
     <Button
       icon={<UserSettings color="plain" />}
       label="Settings"

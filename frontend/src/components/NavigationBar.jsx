@@ -5,7 +5,6 @@ import NavMenu from "./NavMenu";
 import { useState,useEffect } from "react";
 import NavBtnGrpBeforeAuth from "./NavBtnGrpBeforeAuth";
 import NavBtnGrpAfterAuth from "./NavBtnGrpAfterAuth";
-import {CaretNext} from "grommet-icons"
 const NavigationBar = () => {
   const navigate = useNavigate();
   const auth = useAuth();
@@ -23,12 +22,12 @@ const NavigationBar = () => {
     };
   }, []);
   return (
-    <Header background="light-2" pad="medium">
-      <Box direction="row" align="center" gap="small">
+    <Header background="light-2" pad={(windowWidth>600)?"medium":""}>
+      <Box direction="row" align="center" gap="small" style={{paddingLeft:"18px"}}>
         ITS
       </Box>
       {
-    windowWidth>450 ?( auth.user < 1 ? (
+    windowWidth>600 ?( auth.user < 1 ? (
       <NavBtnGrpBeforeAuth/>
             ) : (
               <NavBtnGrpAfterAuth/>
@@ -37,38 +36,38 @@ const NavigationBar = () => {
         (auth.user < 1 ? (
             <NavMenu
              
-            ><List
-      data={["Login","Signin" ]}
-              style={{listStyle:"none"}}
-      pad="small"
-      action={(item, index) => (
-        <Button
+            >
+    
+    {["Login","Signin"
+            ].map((item, index) => (
+        <Box
           key={index}
-          icon={<CaretNext/>}
+          pad="medium"
           hoverIndicator
           onClick={()=>navigate(item.toLowerCase())}
-        >{item}</Button>
-      )}
-    /></NavMenu> 
+        >{item}</Box>
+      ))}
+    
+    
+    
+    </NavMenu> 
           ) : (
             <NavMenu
            
-          ><List
-      data={["Profile",
+          >
+      {["Profile",
               "Newreport",
              "Settings",
               "Logout",
-            ]}
-      pad="small"
-      action={(item, index) => (
-        <Button
-        icon={<CaretNext/>}
-          key={index}
+            ].map((item, index) => (
+        <Box
+         key={index}
+          pad="medium"
           hoverIndicator
           onClick={()=>navigate(item.toLowerCase())}
-        >{item}</Button>
-      )}
-    /></NavMenu>
+        >{item}</Box>
+      ))}
+   </NavMenu>
           )) 
         }
     
