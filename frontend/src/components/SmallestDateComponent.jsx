@@ -1,20 +1,28 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {DateInput,Box,Heading} from "grommet"
 import { useResponsiveScreen } from './Context/ResponsiveScreenContext'
 const SmallestDateComponent = ({label,setval,val}) => {
  const ResponsiveWidth = useResponsiveScreen();
+ const getIpStyle=()=>ResponsiveWidth.windowWidth>500?{width:"initial"}:{width:"20px"};
+ const [IpStyle, setIpStyle] = useState(getIpStyle())
+useEffect(() => {
+  setIpStyle(getIpStyle())
+
+  return () => {
+    
+  }
+}, [ResponsiveWidth.windowWidth])
+
   return (
-    <Box direction='column'>
-<Box margin="10px" align='left' >{label}</Box>
-    <DateInput
-    size={( ResponsiveWidth.windowWidth > 530
-                  ? "medium"
-                  : "xxlarge")}
-   
-        format="mm/dd/yyyy"
-        value={val}
-        onChange={({ value }) => {setval(value)}}
-      /></Box>
+    <Box direction='row' justify='between' style={{width:"100%"}}>
+<Box  align='left' style={{padding:"2px 0",marginRight:"5px",fontSize:"10px"}} >{label}</Box>
+ 
+      
+      
+      <input type="date" value={val}
+        style={IpStyle}
+        onChange={(e) => {setval(e.target.value)}} />
+      </Box>
   )
 }
 
