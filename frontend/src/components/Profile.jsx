@@ -49,25 +49,10 @@ const Profile = () => {
         onMouseOver={() => onMouseOver()}
         onMouseOut={() => onMouseOut()}
       >
-        {userObj.email}{" "}
+        {userObj.email}
       </Link>
-      <Box direction="row" justify="between" width="large" wrap>
-     < DateFilterComponent  label="Report Date filter" Start={{
-      setval:ReportFeature.setDateOfReportStartDate,
-      val:ReportFeature.DateOfReportStartDate
-     }} End={{
-      setval:ReportFeature.setDateOfReportEndDate,
-      val:ReportFeature.DateOfReportEndDate
-     }}/>
-     < DateFilterComponent  label="Injury Date filter" Start={{
-      setval:ReportFeature.setDateOfInjuryStartDate,
-      val:ReportFeature.DateOfInjuryStartDate
-     }} End={{
-      setval:ReportFeature.setDateOfReportEndDate,
-      val:ReportFeature.DateOfReportEndDate
-     }}/>
-     </Box>
-      <Box direction="row" justify="between" style={{marginTop:"80px"}}>
+
+      <Box direction="row" style={{ justifyContent: "space-between" }}>
         <Data pad="small" data={[{ name: "Scott" }, { name: "Zelda" }]}>
           <Toolbar>
             <DataSearch
@@ -101,6 +86,31 @@ const Profile = () => {
             ))}
           </select>
         </Box>
+      </Box>
+
+      <Box direction="row" justify="between" width="large" wrap>
+        <DateFilterComponent
+          label="Report Date filter"
+          Start={{
+            setval: ReportFeature.setDateOfReportStartDate,
+            val: ReportFeature.DateOfReportStartDate,
+          }}
+          End={{
+            setval: ReportFeature.setDateOfReportEndDate,
+            val: ReportFeature.DateOfReportEndDate,
+          }}
+        />
+        <DateFilterComponent
+          label="Injury Date filter"
+          Start={{
+            setval: ReportFeature.setDateOfInjuryStartDate,
+            val: ReportFeature.DateOfInjuryStartDate,
+          }}
+          End={{
+            setval: ReportFeature.setDateOfReportEndDate,
+            val: ReportFeature.DateOfReportEndDate,
+          }}
+        />
       </Box>
     </Box>
   );
