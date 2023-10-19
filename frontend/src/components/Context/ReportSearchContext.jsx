@@ -2,11 +2,11 @@ import { createContext, useContext, useState } from "react";
 const ReportSearchContext = createContext(null);
 export const ReportSearchProvider = ({ children }) => {
 
-  const NewDateVal = new Date().toISOString();
-  const [DateOfInjuryStartDate, setDateOfInjuryStartDate] = useState( NewDateVal);
-  const [DateOfInjuryEndDate, setDateOfInjuryEndDate] = useState( NewDateVal);
-  const [DateOfReportStartDate, setDateOfReportStartDate] = useState( NewDateVal);
-  const [DateOfReportEndDate, setDateOfReportEndDate] = useState( NewDateVal);
+ 
+  const [DateOfInjuryStartDate, setDateOfInjuryStartDate] = useState( "");
+  const [DateOfInjuryEndDate, setDateOfInjuryEndDate] = useState( "");
+  const [DateOfReportStartDate, setDateOfReportStartDate] = useState( "");
+  const [DateOfReportEndDate, setDateOfReportEndDate] = useState( "");
 
 
   return (
