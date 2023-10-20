@@ -41,7 +41,7 @@ const Profile = () => {
       <Avatar
         size="5xl"
         src="https://avatars.githubusercontent.com/u/72566311?v=4"
-        border={{ color: "#7D4CDB", size: "small" }}
+        border={{ color: "#7D4CDB", size: "small" ,flex: "1 0 auto"}}
       />
       {/* will be replaced by userObj.name */}
       <Heading level={1} margin="none" style={{ fontFamily: "sans-serif" }}>
@@ -57,7 +57,7 @@ const Profile = () => {
       </Link>
       <Heading  level={2} style={{alignSelf:"flex-start",marginBottom:"0"}}>Query Reports </Heading>
       <Meter type="bar" value={100} size="full" thickness="xsmall" color="#F2F2F2" style={{padding:"1em 0"}}/>
-      <Box direction="row"  width="large" style={{ justifyContent: "space-between",width:"100%" }}>
+      <Box direction="row"  width="large" style={{ justifyContent: "space-between",width:"100%",flex: "1 0 auto" }}>
         <Box  style={{flex:"1"}}><Data  data={[{ name: "Scott" }, { name: "Zelda" }]}  style={{width:"100%"}}>
           <Toolbar  style={{width:"100%"}}>
             <DataSearch
@@ -95,7 +95,7 @@ const Profile = () => {
         </Box>
       </Box>
 
-      <Box direction="row"  justify="between" style={{width:"100%",padding:"12px 0"}}>
+      <Box direction="row"  justify="between" style={{width:"100%",padding:"12px 0",flex: "1 0 auto"}}>
         <DateFilterComponent
           label="Report Date filter"
           Start={{
