@@ -1,7 +1,7 @@
 import { Box,  Heading } from "grommet";
 import React from "react";
-import { SampleReportData } from "./SampleData";
-const ReportList = () => {
+
+const ReportList = ({ReportData}) => {
   const getProperDateString = (DateString) => {
     const dateVar = new Date(DateString);
     return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()}`;
@@ -12,16 +12,16 @@ const ReportList = () => {
         List of Reports{" "}
       </Heading>
       <Box>
-        <ul>
-        {SampleReportData.map(({ Name, DateofReport, DateofInjury }, index) => {
+        <ul style={{padding:"0"}}>
+        {ReportData?.map(({ Name, DateofReport, DateofInjury }, index) => {
   return (
     <li
       key={index}
       style={{ display: "flex", justifyContent: "space-between" }}
     >
-      <span>{Name}</span>
-      <span>{getProperDateString(DateofReport)}</span>
-      <span>{getProperDateString(DateofInjury)}</span>
+      <span style={{flex:"1",textAlign:"left"}}>{Name}</span>
+      <span style={{flex:"1",textAlign:"center"}}>{getProperDateString(DateofReport)}</span>
+      <span style={{flex:"1",textAlign:"right"}}>{getProperDateString(DateofInjury)}</span>
     </li>
   );
 })}
