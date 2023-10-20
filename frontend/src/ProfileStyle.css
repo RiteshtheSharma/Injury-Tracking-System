@@ -1,4 +1,14 @@
 .DataForm__MaxForm-sc-v64e1r-1.ieQZSt{
     width:100%;
     padding-right: 10px;
+  } 
+  .lbAlAW {
+    
+
+    overflow: visible !important;
+    min-height: max-content !important;
+  } 
+  .lbAlAW img{
+    flex-shrink:0;
+    border-radius: 100%;
   }

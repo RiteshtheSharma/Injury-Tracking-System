@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Avatar,
   Heading,
   Data,
   DataSearch,
@@ -10,53 +9,30 @@ import {
   Meter,
   
 } from "grommet";
-import { Link } from "react-router-dom";
+
 import { useAuth } from "./Context/AuthContext";
 import DateFilterComponent from "./DateFilterComponent";
 import { useReportFeature } from "./Context/ReportSearchContext";
-import { useResponsiveScreen } from "./Context/ResponsiveScreenContext";
+
 import "../ProfileStyle.css";
 import ReportList from "./ReportList";
+import UserInfo from "./UserInfo";
 const Profile = () => {
   const ReportFeature = useReportFeature();
-  const responsiveWidth = useResponsiveScreen();
-  const [linkStyle, setlinkStyle] = useState({
-    textDecoration: "none",
-    color: "#1F2328",
-  });
+ 
+ 
   const [SortBy, setSortBy] = useState("");
-  const onMouseOver = () => {
-    setlinkStyle({ textDecoration: "underline", color: "#0074CC" });
-  };
-  const onMouseOut = () => {
-    setlinkStyle({ textDecoration: "none", color: "#1F2328" });
-  };
-  const auth = useAuth();
+ 
+  const auth = useAuth(); /* will come in use later */
   const userObj = JSON.parse(auth.user);
   const SortByArray = ["Name", "Date Of Injury", "Date of Reporting"];
   useEffect(() => console.log(SortBy), [SortBy]);
 
   return (
     <Box align="center" pad="medium">
-      <Avatar
-        size="5xl"
-        src="https://avatars.githubusercontent.com/u/72566311?v=4"
-        border={{ color: "#7D4CDB", size: "small" ,flex: "1 0 auto"}}
-      />
-      {/* will be replaced by userObj.name */}
-      <Heading level={1} margin="none" style={{ fontFamily: "sans-serif" }}>
-        {"User name"}
-      </Heading>
-      <Link
-        to={`mailto:${userObj.email}`}
-        style={linkStyle}
-        onMouseOver={() => onMouseOver()}
-        onMouseOut={() => onMouseOut()}
-      >
-        {userObj.email}
-      </Link>
+     <UserInfo  userName={"User name"} profileImg={"https://avatars.githubusercontent.com/u/72566311?v=4"} emailID={userObj.email} />
       <Heading  level={2} style={{alignSelf:"flex-start",marginBottom:"0"}}>Query Reports </Heading>
-      <Meter type="bar" value={100} size="full" thickness="xsmall" color="#F2F2F2" style={{padding:"1em 0"}}/>
+      <Meter type="bar" value={100} size="full" thickness="xsmall" color="#F2F2F2" style={{padding:"1em 0",flex: "1 0 auto" }}/>
       <Box direction="row"  width="large" style={{ justifyContent: "space-between",width:"100%",flex: "1 0 auto" }}>
         <Box  style={{flex:"1"}}><Data  data={[{ name: "Scott" }, { name: "Zelda" }]}  style={{width:"100%"}}>
           <Toolbar  style={{width:"100%"}}>
