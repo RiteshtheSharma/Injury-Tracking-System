@@ -25,9 +25,11 @@ const Profile = () => {
   const userObj = JSON.parse(auth?.user);
   const ReportListReducer = (Reports, action) => {
     switch (action.type) {
+      case "reinitialize":
+        return [...action.newReport]
       case "search":
         return [
-          ...Reports.filter((report) => report["Name"].toLowerCase().indexOf(action.searchName.toLowerCase())),
+          ...Reports.filter((report) => report["Name"].toLowerCase().indexOf(action.searchName.toLowerCase())>-1),
         ];
 
       case "sort":
@@ -46,11 +48,9 @@ const Profile = () => {
             : -1;
         });
         case "filter":
-          return Reports.filter(report=>{
-            if(action.operator ==="gte")
-          return  report[action.FilterProperty] >= action.FilterPropertyCompValue;
-        else return report[action.FilterProperty] <= action.FilterPropertyCompValue
-             })
+          return Reports.filter(report=>
+            (action.operator ==="gte")? (new Date(report[action.FilterProperty])) >= (new Date(action.FilterPropertyCompValue)):(new Date(report[action.FilterProperty])) <= (new Date(action.FilterPropertyCompValue))
+             )
     }
   };
   const [ReportListstate, ReportListdispatch] = useReducer(
@@ -63,10 +63,18 @@ const Profile = () => {
   const SortByArray = ["Name", "DateofReport", "DateofInjury"];
   useEffect(() => console.log(SortBy), [SortBy]);
 const onApplyChangesBtnClick =()=>{
+  ReportListdispatch({type:"reinitialize",newReport:SampleReportData})
   ReportListdispatch({type:"search",searchName:searchName})
   if(SortBy.length>0)
   ReportListdispatch({type:"sort",sortProperty:SortBy})
+  if(isValidDate(ReportFeature.DateOfInjuryStartDate))
+  ReportListdispatch({type:"filter",FilterProperty:"DateofInjury",operator:"gte",FilterPropertyCompValue:ReportFeature.DateOfInjuryStartDate});
+  if(isValidDate(ReportFeature.DateOfInjuryEndDate))
+  ReportListdispatch({type:"filter",FilterProperty:"DateofInjury",operator:"lte",FilterPropertyCompValue:ReportFeature.DateOfInjuryEndDate});
   if(isValidDate(ReportFeature.DateOfReportStartDate))
+  ReportListdispatch({type:"filter",FilterProperty:"DateofReport",operator:"gte",FilterPropertyCompValue:ReportFeature.DateOfReportStartDate});
+if(isValidDate(ReportFeature.DateOfReportEndDate))
+ReportListdispatch({type:"filter",FilterProperty:"DateofReport",operator:"lte",FilterPropertyCompValue:ReportFeature.DateOfReportEndDate});
 }
   return (
     <Box align="center" pad="medium">
@@ -169,7 +177,7 @@ const onApplyChangesBtnClick =()=>{
         />
       </Box>
       <Button primary label="Apply Changes" style={{ width: "100%" }} onClick={(e)=>{onApplyChangesBtnClick()}}/>
-      <ReportList ReportData={SampleReportData} />
+      <ReportList ReportData={ReportListstate} />
     </Box>
   );
 };
