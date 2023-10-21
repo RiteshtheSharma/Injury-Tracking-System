@@ -8,8 +8,8 @@ const DateFilterComponent = ({label ,Start,End}) => {
     <Box direction="column" style={{margin:"5px",width:"100%"}}>
     <Box align='left' style={{fontWeight:"bold", fontFamily: "sans-serif",fontSize:"15px"}}>{label}</Box>
     <Box direction='row' style={{flexWrap:"wrap",justifyContent :"space-between"}} >
-    <SmallestDateComponent label="Start Date" setval={Start.setval} val={Start.val} />
-    <SmallestDateComponent label="End Date" setval={End.setval} val={End.val} />
+    <SmallestDateComponent label="Start Date" setval={Start.setval} val={Start.val} greaterDateLimit={End.val}/>
+    <SmallestDateComponent label="End Date" setval={End.setval} val={End.val} smallerDateLimit={Start.val}/>
     </Box>
   </Box>
   )
