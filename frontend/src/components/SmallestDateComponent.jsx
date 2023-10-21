@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { DateInput, Box, Heading } from "grommet";
 import { useResponsiveScreen } from "./Context/ResponsiveScreenContext";
 import PropTypes from "prop-types";
+import { isValidDate } from "../NonReactCompFunc";
 const SmallestDateComponent = ({
   label,
   setval,
@@ -16,9 +17,7 @@ const SmallestDateComponent = ({
       : { width: "20px" };
   const [IpStyle, setIpStyle] = useState(getIpStyle());
 
-  function isValidDate(dateString) {
-    return !isNaN(Date.parse(dateString));
-  }
+
   const handleInputDateChange = (newDateVal) => {
     if (newDateVal.length === 0) {
       setval("");
