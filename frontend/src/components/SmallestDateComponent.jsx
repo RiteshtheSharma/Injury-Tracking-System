@@ -20,6 +20,10 @@ const SmallestDateComponent = ({
     return !isNaN(Date.parse(dateString));
   }
   const handleInputDateChange = (newDateVal) => {
+    if (newDateVal.length === 0) {
+      setval("");
+      return;
+    }
     let newDateValDateobj = new Date(newDateVal),
       smallerDateLimitDateobj = null,
       greaterDateLimitDateobj = null;
@@ -67,5 +71,9 @@ SmallestDateComponent.PropTypes = {
   val: PropTypes.string,
   smallerDateLimit: PropTypes.string,
   greaterDateLimit: PropTypes.string,
+};
+SmallestDateComponent.defaultProps = {
+  smallerDateLimit: "",
+  greaterDateLimit: "",
 };
 export default SmallestDateComponent;
