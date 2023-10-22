@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "./components/RequireAuth";
 import Profile from "./components/Profile"
 import Logout from "./components/Logout";
-
+import NewReport from "./components/NewReport";
 function App() {
  
  
@@ -32,7 +32,7 @@ function App() {
             }
           />
            <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
-           <Route path="newreport" element={<>{"newreport"}</>} />
+           <Route path="newreport" element={<NewReport/>} />
            <Route path="settings" element={<>{"settings"}</>} />
         </Routes></>
      
