@@ -22,7 +22,8 @@ const Profile = () => {
   const [SortBy, setSortBy] = useState("");
   const [searchName, setsearchName] = useState("");
   const auth = useAuth(); /* will come in use later */
-  const userObj = JSON.parse(auth?.user);
+
+  const userObj = auth.user;
   const ReportListReducer = (Reports, action) => {
     switch (action.type) {
       case "reinitialize":
