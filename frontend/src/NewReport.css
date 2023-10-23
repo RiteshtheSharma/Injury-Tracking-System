@@ -1,0 +1,7 @@
+.circle_Dot{border:1px solid red;
+border-radius: 100%;
+width:1px;
+height:1px;
+position: relative;
+display: inline-block;
+}
