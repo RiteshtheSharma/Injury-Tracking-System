@@ -7,8 +7,15 @@ import { RequireAuth } from "./components/RequireAuth";
 import Profile from "./components/Profile"
 import Logout from "./components/Logout";
 import NewReport from "./components/NewReport";
+import { useAuth } from "./components/Context/AuthContext";
+import { useEffect } from "react";
 function App() {
+ const auth = useAuth()
+ useEffect(() => {
+   auth.setuser(JSON.parse(auth.user))
  
+   
+ }, [])
  
   
   return (

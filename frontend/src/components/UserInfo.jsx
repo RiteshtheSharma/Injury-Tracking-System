@@ -22,13 +22,14 @@ const UserInfo = ({userName,profileImg,emailID}) => {
         setlinkStyle({ textDecoration: "none", color: "#1F2328" });
       };
     
-     
+     console.log(emailID,"in userInfo");
   return (
     <>
     <Avatar
     size="5xl"
     src={profileImg}
-    border={{ color: "#7D4CDB", size: "small" ,flex:"1 0 auto"}}
+    border={{ color: "#7D4CDB", size: "small" }}
+    style={{minHeight:"192px"}}
   />
   {/* will be replaced by userObj.name */}
   <Heading level={1} margin="none" style={{ fontFamily: "sans-serif" }}>

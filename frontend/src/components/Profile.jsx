@@ -23,7 +23,8 @@ const Profile = () => {
   const [searchName, setsearchName] = useState("");
   const auth = useAuth(); /* will come in use later */
 
-  const userObj = auth.user;
+
+  const {email,pwd} = auth.user;
   const ReportListReducer = (Reports, action) => {
     switch (action.type) {
       case "reinitialize":
@@ -68,10 +69,11 @@ const Profile = () => {
     SampleReportData
   );
 
-  console.log(auth.user, "in profile");
+
 
   const SortByArray = ["Name", "DateofReport", "DateofInjury"];
   useEffect(() => console.log(SortBy), [SortBy]);
+  useEffect(()=>  console.log(email,pwd, "in profile",typeof(userObj)),[])
   const onApplyChangesBtnClick = () => {
     ReportListdispatch({ type: "reinitialize", newReport: SampleReportData });
     ReportListdispatch({ type: "search", searchName: searchName });
@@ -111,7 +113,7 @@ const Profile = () => {
       <UserInfo
         userName={"User name"}
         profileImg={"https://avatars.githubusercontent.com/u/72566311?v=4"}
-        emailID={userObj.email}
+        emailID={email}
       />
       <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>
         Query Reports{" "}
