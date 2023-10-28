@@ -12,12 +12,12 @@ const NavigationBar = () => {
 
 
   return (
-    <Header background="light-2" pad={( responsiveWidth.windowWidth>600)?"medium":""}>
+    <Header background="light-2" pad={( responsiveWidth.windowWidth>660)?"medium":""}>
       <Box direction="row" align="center" gap="small" style={{paddingLeft:"18px"}}>
         ITS
       </Box>
       {
-        responsiveWidth. windowWidth>600 ?( auth.user < 1 ? (
+        responsiveWidth. windowWidth>660 ?( auth.user < 1 ? (
       <NavBtnGrpBeforeAuth/>
             ) : (
               <NavBtnGrpAfterAuth/>
