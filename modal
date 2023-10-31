@@ -1,0 +1,77 @@
+import React from 'react';
+
+import { Trash } from 'grommet-icons';
+
+import { Box, Button, Heading, Layer, Select, Text ,Form, FormField, TextInput } from 'grommet';
+
+export const CenterLayer = () => {
+  const [open, setOpen] = React.useState();
+
+  const onOpen = () => setOpen(true);
+
+  const onClose = () => setOpen(undefined);
+  const [value, setValue] = React.useState({ name: 'a', email: 'b' });
+
+  return (
+    
+    <>
+      <Box fill align="center" justify="center">
+        <Button
+          icon={<Trash />}
+          label={
+            <Text>
+              <strong>Remove</strong>
+            </Text>
+          }
+          onClick={onOpen}
+          plain
+        />
+      </Box>
+      {open && (
+        <Layer
+          id="hello world"
+          position="center"
+          onClickOutside={onClose}
+          onEsc={onClose}
+        >
+          Box fill align="center" justify="center">
+      <Box width="medium">
+        <Form
+          value={value}
+          onChange={(nextValue) => setValue(nextValue)}
+          onSubmit={({ value: nextValue }) => console.log(nextValue)}
+        >
+          <FormField label="Name" name="name" required>
+            <TextInput aria-label="name" name="name" type="name" />
+          </FormField>
+
+          <FormField label="Email" name="email" required>
+            <TextInput aria-label="email" name="email" type="email" />
+          </FormField>
+
+          {message && (
+            <Box pad={{ horizontal: 'small' }}>
+              <Text color="status-error">{message}</Text>
+            </Box>
+          )}
+
+          <Box direction="row" justify="between" margin={{ top: 'medium' }}>
+            <Button
+              onClick={() => setValue({ name: '', email: '' })}
+              type="reset"
+              label="Reset"
+            />
+            <Button type="submit" label="Update" primary />
+          </Box>
+        </Form>
+      </Box>
+    </Box>
+        </Layer>
+      )}
+     
+    </>
+   
+  );
+};
+
+

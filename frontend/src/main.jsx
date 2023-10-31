@@ -7,6 +7,7 @@ import { Grommet } from "grommet";
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import { ReportSearchProvider } from "./components/Context/ReportSearchContext.jsx";
 import { ResponsiveScreenProvider } from "./components/Context/ResponsiveScreenContext.jsx";
+import { InjuryPointProvider } from "./components/Context/InjuryContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
  
@@ -14,10 +15,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ResponsiveScreenProvider>
     <AuthProvider>
     <ReportSearchProvider>
+    <InjuryPointProvider>
       <Grommet theme={theme} full style={{display:"flex",flexDirection:"column"}}>
 
         <App />
       </Grommet>
+      </InjuryPointProvider>
       </ReportSearchProvider>
       </AuthProvider>
     </ResponsiveScreenProvider>  
