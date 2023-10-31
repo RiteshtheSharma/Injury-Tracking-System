@@ -1,23 +1,40 @@
 import { createContext, useContext, useState } from "react";
 const InjuryPointContext = createContext(null);
 export const InjuryPointProvider = ({ children }) => {
-    const gridElementClassList = Array.from(Array(8192),()=>'cell');
-    const [BackInjuryPoints, setBackInjuryPoints] = useState(gridElementClassList);
-    const toggleBackPoints = (event)=>{
-    const BackGridElementClassList = [...BackInjuryPoints];
-    const index =  parseInt((event.target.id).slice(1));
-     BackGridElementClassList[index]=(BackGridElementClassList[index]==="cell")?"cell circle_Dot":"cell";
-     setBackInjuryPoints(BackGridElementClassList);
+    
+    const [BackInjuryPoints, setBackInjuryPoints] = useState({});
+  
+    const toggleBackPoints = (gridItemId,label=null,description=null)=>{
+    const BackGridElementClassList = {...BackInjuryPoints};
+     if(isInjuryPointId(gridItemId))
+     {setBackInjuryPoints({...BackInjuryPoints,[gridItemId]:{label:label,description:description}})}
+    else 
+    {const {[gridItemId]: removedProperty , ...newBackGridElementClassList} = BackGridElementClassList; 
+     setBackInjuryPoints(newBackGridElementClassList);
+    }
+     
   } 
-  const [FrontInjuryPoints, setFrontInjuryPoints] = useState([...gridElementClassList]);
-  const toggleFrontPoints = (event)=>{
-    const FrontGridElementClassList = [...FrontInjuryPoints];
-    const index =  parseInt((event.target.id).slice(1));
-     FrontGridElementClassList[index]=(FrontGridElementClassList[index]==="cell")?"cell circle_Dot":"cell";
-     setFrontInjuryPoints(FrontGridElementClassList);
+  const [FrontInjuryPoints, setFrontInjuryPoints] = useState({});
+  const toggleFrontPoints = (gridItemId,label=null,description=null)=>{
+    const FrontGridElementClassList = {...FrontInjuryPoints};
+    if(isInjuryPointId(gridItemId))
+    { setFrontInjuryPoints({...FrontInjuryPoints,[gridItemId]:{label:label,description:description}});}
+   else 
+   {const {[gridItemId]: removedProperty , ...newFrontGridElementClassList} = FrontGridElementClassList; 
+    setFrontInjuryPoints(newFrontGridElementClassList);
+   }   
   }
+
+  const isInjuryPointId =(id)=>{
+    const idBodyTypePart = id.slice(0,1);
+    if(idBodyTypePart === 'b') return Object.hasOwn(BackInjuryPoints,id) 
+    else return Object.hasOwn(FrontInjuryPoints,id) 
+  }
+
+  
+
   return (
-    <InjuryPointContext.Provider value={{BackInjuryPoints,toggleBackPoints,FrontInjuryPoints,toggleFrontPoints }}>
+    <InjuryPointContext.Provider value={{BackInjuryPoints,toggleBackPoints,FrontInjuryPoints,toggleFrontPoints,isInjuryPointId }}>
       {children}
     </InjuryPointContext.Provider>
   );

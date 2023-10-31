@@ -13,8 +13,8 @@ const ResponsiveScreenWindow = useResponsiveScreen();
    <Heading level={1} align="center" style={{maxWidth:"100vw"}}>Generate new report</Heading>
    <Heading level={3} weight="lighter" align="center" style={{maxWidth:"100vw"}}>Mark the injuries on below body images by clicking the injured areas</Heading>
     <Box direction='row' wrap justify="between" style={{marginTop:"auto"}}>
-     <BodyInjuryComponent BodySecName={"Back body section"} ImgUrl={BackBodyImg} InjuryPointsArr={InjuryPointObject.BackInjuryPoints} togglePoints={InjuryPointObject.toggleBackPoints}/>
-     <BodyInjuryComponent BodySecName={"Front body section"} ImgUrl={FrontBodyImg} InjuryPointsArr={InjuryPointObject.FrontInjuryPoints} togglePoints={InjuryPointObject.toggleFrontPoints}/>
+     <BodyInjuryComponent BodySecName={"Back body section"} ImgUrl={BackBodyImg} togglePoints={InjuryPointObject.toggleBackPoints} InjuryPoints={InjuryPointObject.BackInjuryPoints} />
+     <BodyInjuryComponent BodySecName={"Front body section"} ImgUrl={FrontBodyImg} togglePoints={InjuryPointObject.toggleFrontPoints} InjuryPoints={InjuryPointObject.FrontInjuryPoints}  />
        
        
     </Box>
