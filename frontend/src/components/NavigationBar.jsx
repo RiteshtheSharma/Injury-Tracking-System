@@ -17,13 +17,13 @@ const NavigationBar = () => {
         ITS
       </Box>
       {
-        responsiveWidth. windowWidth>660 ?( auth.user < 1 ? (
+        responsiveWidth. windowWidth>660 ?( Object.keys(auth.user).length < 1 ? (
       <NavBtnGrpBeforeAuth/>
             ) : (
               <NavBtnGrpAfterAuth/>
             )):
            
-        (auth.user < 1 ? (
+        (Object.keys(auth.user).length  < 1 ? (
             <NavMenu
              
             >
