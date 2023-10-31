@@ -12,7 +12,7 @@ import { useEffect } from "react";
 function App() {
  const auth = useAuth()
  useEffect(() => {
-   auth.setuser(JSON.parse(auth.user))
+   auth.setuser(JSON.parse(auth?.user))
  
    
  }, [])
