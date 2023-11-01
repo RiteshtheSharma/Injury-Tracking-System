@@ -1,7 +1,7 @@
 .grid {
     display: grid !important;
-    grid-template-columns: repeat(64, 1fr); /* make the columns adjust automatically */
-    grid-template-rows: repeat(128, 1fr); /* make the columns adjust automatically */
+    grid-template-columns: repeat(16, 1fr); /* make the columns adjust automatically */
+    grid-template-rows: repeat(32, 1fr); /* make the columns adjust automatically */
     grid-auto-rows: 1fr;
     gap: 1px; /* gap between cells */
     margin: 0 auto; /* center the grid horizontally */
