@@ -8,9 +8,11 @@ import Profile from "./components/Profile"
 import Logout from "./components/Logout";
 import NewReport from "./components/NewReport";
 import { useAuth } from "./components/Context/AuthContext";
+
 import { useEffect } from "react";
 function App() {
- const auth = useAuth()
+ const auth = useAuth();
+
  useEffect(() => {
    auth.setuser(JSON.parse(auth?.user))
  
@@ -39,8 +41,8 @@ function App() {
             }
           />
            <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
-           <Route path="newreport" element={<NewReport/>} />
-           <Route path="settings" element={<>{"settings"}</>} />
+           <Route path="newreport" element={<RequireAuth><NewReport/></RequireAuth>} />
+           <Route path="settings" element={<RequireAuth>{"settings"}</RequireAuth>} />
         </Routes></>
      
   
