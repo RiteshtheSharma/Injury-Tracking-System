@@ -3,18 +3,12 @@ import {useState} from 'react';
 
 import { Box, Button,  Layer,  Text } from 'grommet';
 
-export const Modal = ({Open , Component}) => {
-  const [open, setOpen] = useState(Open);
-  
-
-  const onOpen = () => setOpen(true);
-
-  const onClose = () => setOpen(undefined);
-
+export const Modal = ({Open , Component,onClose }) => {
+   
 
   return (
   
-     <>{open && (
+     <>{Open && (
         <Layer
           id="hello world"
           position="center"
