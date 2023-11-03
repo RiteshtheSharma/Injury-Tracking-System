@@ -9,7 +9,6 @@ import {
   Meter,
   List,
 } from "grommet";
-import { SampleReportData } from "./SampleData";
 import { useAuth } from "./Context/AuthContext";
 import DateFilterComponent from "./DateFilterComponent";
 import { useReportFeature } from "./Context/ReportSearchContext";
@@ -17,12 +16,13 @@ import { isValidDate } from "../NonReactCompFunc";
 import "../ProfileStyle.css";
 import ReportList from "./ReportList";
 import UserInfo from "./UserInfo";
+import {useReportList} from './Context/ReportListContext'
 const Profile = () => {
   const ReportFeature = useReportFeature();
   const [SortBy, setSortBy] = useState("");
   const [searchName, setsearchName] = useState("");
   const auth = useAuth(); /* will come in use later */
-
+  const ReportListContextObject = useReportList();
 
   const {email,pwd} = auth.user;
   const ReportListReducer = (Reports, action) => {
@@ -66,16 +66,17 @@ const Profile = () => {
   };
   const [ReportListstate, ReportListdispatch] = useReducer(
     ReportListReducer,
-    SampleReportData
+    ReportListContextObject.ReportList
   );
 
 
 
   const SortByArray = ["Name", "DateofReport", "DateofInjury"];
-  useEffect(() => console.log(SortBy), [SortBy]);
-  useEffect(()=>  console.log(email,pwd, "in profile",typeof(userObj)),[])
+  // useEffect(() => console.log(SortBy), [SortBy]);
+  // useEffect(()=>  console.log(email,pwd, "in profile",typeof(userObj)),[])
+
   const onApplyChangesBtnClick = () => {
-    ReportListdispatch({ type: "reinitialize", newReport: SampleReportData });
+    ReportListdispatch({ type: "reinitialize", newReport: ReportListContextObject.ReportList});
     ReportListdispatch({ type: "search", searchName: searchName });
     if (SortBy.length > 0)
       ReportListdispatch({ type: "sort", sortProperty: SortBy });
