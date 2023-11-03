@@ -3,6 +3,7 @@ import { useResponsiveScreen } from "./Context/ResponsiveScreenContext";
 import { useState, useEffect } from "react";
 import { Modal } from "./Modal";
 import InjuryPointForm from "./InjuryPointForm";
+import { Fragment } from "react";
 const BodyInjuryComponent = ({
   BodySecName,
   ImgUrl,
@@ -83,10 +84,10 @@ const BodyInjuryComponent = ({
         }}
       >
         {[...ItemDataList].map((Data, index) => (
-          <>{Data ? (
+          <Fragment key={index}>{Data ? (
         <Tip
           dropProps={{ align: { left: "right" } }}
-          key={index}
+          
           content={
             <Box
               pad="small"
@@ -108,8 +109,8 @@ const BodyInjuryComponent = ({
           <span id={`${idIndicatingPart}${index}`} className="cell circle_Dot" onClick={onCircledItemClick}></span>
         </Tip>
       ) : (
-        <span key={index} id={`${idIndicatingPart}${index}`} className="cell" onClick={onUncircledItemClick}></span>
-      )}</>
+        <span  id={`${idIndicatingPart}${index}`} className="cell" onClick={onUncircledItemClick}></span>
+      )}</Fragment>
           
         ))}
       </Box>
