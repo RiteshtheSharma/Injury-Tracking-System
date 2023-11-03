@@ -6,18 +6,21 @@ export const AuthProvider = ({ children }) => {
   const [user, setuser] = useState( localStorage.getItem("user") === null ?"{}":localStorage.getItem("user"));
  
   const login = (email,pwd) => {
-    setuser({email,pwd});
-    localStorage.setItem("user",JSON.stringify({email,pwd}));
+    const Name = "userName" // will be replaced by server fetched user name
+    setuser({email,pwd,Name});
+    localStorage.setItem("user",JSON.stringify({email,pwd,Name}));
+    navigate('/profile')
   };
   const signin = (username,email,pwd)=>{
-    setuser({email,pwd});
-    localStorage.setItem("user",JSON.stringify({email,pwd}))
+    const Name = username ;
+    setuser({email,pwd,Name});
+    localStorage.setItem("user",JSON.stringify({email,pwd,Name}))
   }
   const logout = () => {
     setuser("{}");
     localStorage.clear()
     console.log("executed logout");
-    navigate('/');
+    navigate('');
   };
 
   return (

@@ -1,12 +1,12 @@
 import { Box,  Heading,Tip,} from "grommet";
-
+import { useNavigate } from "react-router-dom";
 
 const ReportList = ({ReportData}) => {
   const getProperDateString = (DateString) => {
     const dateVar = new Date(DateString);
     return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()}`;
   };
-
+  const Navigate = useNavigate();
 
   return (
     <Box style={{ width: "100%" }}>
@@ -21,20 +21,23 @@ const ReportList = ({ReportData}) => {
        <Box style={{textAlign:"justify",fontSize:"23px",fontFamily:"cursive",fontWeight:"bolder"}}>Report date</Box>
        <Box  style={{flex:"1",textAlign:"right",fontSize:"23px",fontFamily:"cursive",fontWeight:"bolder"}}>Injury date</Box>
  </li>
-        {ReportData?.map(({ Name, DateofReport, DateofInjury }, index) => {
+        {ReportData?.map((Report, index) => {
+         
   return (
+  
     <li
       key={index}
       style={{ display: "flex", justifyContent: "space-between",padding:"5px 2px",boxShadow:"rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }}
-    onClick={()=>{}}
+    onClick={()=>{Navigate(`/report/${index}`)}}
     >
-    <Tip content={<span style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{Name}</span>}
+     
+    <Tip content={<span style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{Report.Name}</span>}
     plain 
    >
-      <Box style={{textAlign:"left",flex:"1"}}>{Name}</Box>
+      <Box style={{textAlign:"left",flex:"1"}}>{Report.Name}</Box>
     </Tip>   
-      <Box style={{textAlign:"justify",alignSelf:"center"}}>{getProperDateString(DateofReport)}</Box>
-      <Box style={{flex:"1",textAlign:"right",alignSelf:"center"}}>{getProperDateString(DateofInjury)}</Box>
+      <Box style={{textAlign:"justify",alignSelf:"center"}}>{getProperDateString(Report.DateofReport)}</Box>
+      <Box style={{flex:"1",textAlign:"right",alignSelf:"center"}}>{getProperDateString(Report.DateofInjury)}</Box>
     </li>
   );
 })}

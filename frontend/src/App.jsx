@@ -10,6 +10,7 @@ import NewReport from "./components/NewReport";
 import { useAuth } from "./components/Context/AuthContext";
 
 import { useEffect } from "react";
+import Report from "./components/Report";
 function App() {
  const auth = useAuth();
 
@@ -43,6 +44,7 @@ function App() {
            <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
            <Route path="newreport" element={<RequireAuth><NewReport/></RequireAuth>} />
            <Route path="settings" element={<RequireAuth>{"settings"}</RequireAuth>} />
+           <Route path="report/:id" element={<RequireAuth><Report/></RequireAuth>} />
         </Routes></>
      
   

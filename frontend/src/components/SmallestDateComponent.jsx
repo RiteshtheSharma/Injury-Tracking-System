@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import { isValidDate } from "../NonReactCompFunc";
 const SmallestDateComponent = ({
   label,
+  labelFontSize,
+  dir,
+  gap,
+  inputType,
   setval,
   val,
   smallerDateLimit,
@@ -12,9 +16,9 @@ const SmallestDateComponent = ({
 }) => {
   const ResponsiveWidth = useResponsiveScreen();
   const getIpStyle = () =>
-    ResponsiveWidth.windowWidth > 500
-      ? { width: "initial" }
-      : { width: "20px" };
+    ResponsiveWidth.windowWidth > 500 
+      ? { width: "initial" ,maxWidth:"40vw"}
+      : (dir=== "column" || label==="" ?{width:"calc(100vw - 60px)"}:{ width: "20px" });
   const [IpStyle, setIpStyle] = useState(getIpStyle());
 
 
@@ -45,16 +49,17 @@ const SmallestDateComponent = ({
   }, [ResponsiveWidth.windowWidth]);
 
   return (
-    <Box direction="row" justify="between" style={{ width: "100%" }}>
+    <Box direction={dir} gap={gap} justify="between" style={{ width: (label.length>0?"100%":"auto") }}>
+    {label.length>0 &&
       <Box
         align="left"
-        style={{ padding: "2px 0", marginRight: "5px", fontSize: "10px" }}
+        style={{ padding: "2px 0", marginRight: "5px", fontSize: labelFontSize }}
       >
         {label}
       </Box>
-
+}
       <input
-        type="date"
+        type={inputType}
         value={val}
         style={IpStyle}
         onChange={(e) => {
@@ -64,14 +69,22 @@ const SmallestDateComponent = ({
     </Box>
   );
 };
-SmallestDateComponent.PropTypes = {
+SmallestDateComponent.propTypes = {
   label: PropTypes.string,
+  labelFontSize: PropTypes.string,
+  dir : PropTypes.string,
+  gap : PropTypes.string,
+  inputType : PropTypes.string,
   setval: PropTypes.func,
   val: PropTypes.string,
   smallerDateLimit: PropTypes.string,
   greaterDateLimit: PropTypes.string,
 };
 SmallestDateComponent.defaultProps = {
+  labelFontSize:"10px",
+  dir:"row",
+  gap:"unset",
+  inputType:"date",
   smallerDateLimit: "",
   greaterDateLimit: "",
 };
