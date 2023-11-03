@@ -17,7 +17,7 @@ const NavigationBar = () => {
         ITS
       </Box>
       {
-        responsiveWidth. windowWidth>660 ?( Object.keys(auth.user).length < 1 ? (
+        responsiveWidth. windowWidth>660 ?( (Object.keys(auth.user).length < 1 || localStorage.getItem("user")===null)? (
       <NavBtnGrpBeforeAuth/>
             ) : (
               <NavBtnGrpAfterAuth/>
