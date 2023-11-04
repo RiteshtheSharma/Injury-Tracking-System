@@ -32,7 +32,7 @@ const UserInfo = ({userName,profileImg,emailID}) => {
     style={{minHeight:"192px"}}
   />
   {/* will be replaced by userObj.name */}
-  <Heading level={1} margin="none" style={{ fontFamily: "sans-serif" }}>
+  <Heading level={1} margin="none" style={{ fontFamily: "sans-serif" ,textTransform:"capitalize"}}>
     {userName}
   </Heading>
   <Link
