@@ -7,9 +7,12 @@ import FrontBodyImg from "../assets/front_body.png"
 import BodyInjuryComponent from "./BodyInjuryComponent";
 import { useResponsiveScreen } from "./Context/ResponsiveScreenContext";
 import SmallestDateComponent from "./SmallestDateComponent";
+import UserInfo from "./UserInfo";
+import { useAuth } from "./Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Report = () => {
     const ResponsiveScreenWindow = useResponsiveScreen();
-    const url = window.location.href;
+    const ReportListContextObj = useReportList();
     function convertTo12HourFormat(hr,min) {
         let hours = hr;
         let minutes = min;
@@ -27,8 +30,10 @@ const Report = () => {
         const dateVar = new Date(DateString);
         return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()} ,${convertTo12HourFormat(dateVar.getHours(),dateVar.getMinutes())}`;
       };
+      const url = window.location.href;
     const index = parseInt((url).slice(url.lastIndexOf("/")+1))
-    const report = (useReportList().ReportList)[index] ;
+    const report = (ReportListContextObj.ReportList)[index] ;
+    console.log(ReportListContextObj.ReportList," in Report")
     const isInjuryPointId = (id) => {
         const idBodyTypePart = id.slice(0, 1);
         if (idBodyTypePart === "b") return Object.hasOwn(BackInjuryPoints, id);
@@ -36,7 +41,7 @@ const Report = () => {
       };
 
 const [BackInjuryPoints, setBackInjuryPoints] = useState(
-    ('backInjuryPoints' in report)?report['backInjuryPoints']:{}
+    (typeof(report) ===typeof({})  && 'backInjuryPoints' in report)?report['backInjuryPoints']:{}
   );
   const toggleBackPoints = (gridItemId, label = null, description = null) => {
     const tempBackInjuryPoints = { ...BackInjuryPoints };
@@ -54,7 +59,7 @@ const [BackInjuryPoints, setBackInjuryPoints] = useState(
       setBackInjuryPoints(newBackInjuryPoints);
     }
   };
-  const [FrontInjuryPoints, setFrontInjuryPoints] = useState(('frontInjuryPoints' in report) ?report['frontInjuryPoints']:{});
+  const [FrontInjuryPoints, setFrontInjuryPoints] = useState((typeof(report) ===typeof({})  && 'frontInjuryPoints' in report) ?report['frontInjuryPoints']:{});
   const toggleFrontPoints = (gridItemId, label = null, description = null) => {
     const tempFrontInjuryPoints = { ...FrontInjuryPoints };
     if (!isInjuryPointId(gridItemId)) {
@@ -70,16 +75,38 @@ const [BackInjuryPoints, setBackInjuryPoints] = useState(
       setFrontInjuryPoints(newFrontInjuryPoints);
     }
   };
-const [newDateofInjury, setnewDateofInjury] = useState(report.DateofInjury);
+const [newDateofInjury, setnewDateofInjury] = useState(report?.DateofInjury);
 const [BtnState, setBtnState] = useState("change")
+
+const handleOnClickUpdateChange = ()=>{
+  ReportListContextObj.updateReportList ({
+  frontInjuryPoints:FrontInjuryPoints,
+  backInjuryPoints:BackInjuryPoints,
+  DateofInjury:newDateofInjury ,
+  DateofReport : report.DateofReport,
+  Name:report.Name
+  },index);
+}
+const navigate = useNavigate();
+const handleOnClickDeleteReport = ()=>{ReportListContextObj.deleteReportList(index);
+navigate('profile')
+
+}
+const auth = useAuth();
   return (
     <Box  pad="large" gap="10px">
-    <Box style={{minHeight:"auto",alignText:"left"}}>
-        <Text weight="bold" size="xlarge">
-          {report.Name}
-        </Text>
-        <Box direction="row" wrap pad="xxsmall"> <span style={{textDecoration : "underline"}}>Report Date</span> : <span style={{alignItems:"center"}}>{ getProperDateString(report.DateofReport)}</span></Box>
-        <Box pad="xxsmall" direction="row" style={{alignItems:"center",flexWrap:"wrap"}}><span style={{textDecoration : "underline"}}>Injury Date</span> : {BtnState==="change"?(<Box direction="row" style={{alignItems:"center"}}><span>{getProperDateString(report.DateofInjury)}</span><Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/></Box>):<Box direction="row"><SmallestDateComponent label="" labelFontSize={"20px"} gap={"10px"} inputType={"datetime-local"} setval={ setnewDateofInjury} val={newDateofInjury} greaterDateLimit={report.DateofReport}/>  
+    <Box style={{minHeight:"auto",alignText:"left"}} >
+    <Box style={{padding:"10px 0"}}> 
+    <UserInfo
+        userName={auth.user.Name}
+        profileImg={"https://avatars.githubusercontent.com/u/72566311?v=4"}
+        emailID={auth.user.email}
+
+      />
+    </Box>
+    
+        <Box direction="row" wrap pad="xxsmall"> <span style={{textDecoration : "underline"}}>Report Date</span> : <span style={{alignItems:"center"}}>{ getProperDateString(report?.DateofReport)}</span></Box>
+        <Box pad="xxsmall" direction="row" style={{alignItems:"center",flexWrap:"wrap"}}><span style={{textDecoration : "underline"}}>Injury Date</span> : {BtnState==="change"?(<Box direction="row" style={{alignItems:"center"}}><span>{getProperDateString(newDateofInjury)}</span><Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/></Box>):<Box direction="row"><SmallestDateComponent label="" labelFontSize={"20px"} gap={"10px"} inputType={"datetime-local"} setval={ setnewDateofInjury} val={newDateofInjury} greaterDateLimit={report?.DateofReport}/>  
         <Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/></Box>
   } </Box>
       </Box>
@@ -93,7 +120,8 @@ const [BtnState, setBtnState] = useState("change")
   
       </Box>
       
-    <Button primary pad={"medium"} label="Update change"   onClick={()=>{}} />
+    <Button primary pad={"medium"} label="Update change"   onClick={handleOnClickUpdateChange} />
+    <Button primary pad={"medium"} label="Delete"   onClick={handleOnClickDeleteReport} />
 
   </Box>
   )

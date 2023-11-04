@@ -15,9 +15,12 @@ export const ReportListProvider = ({ children }) => {
       ReportData = SampleReportData;}
         return ReportData;
     }
+    const initializeReportList=()=>{
+      setReportList(fetchReportList())
+    }
     const addReportList = (newReport) =>{
         // server code to add newReport to server 
-        
+        // change 'index' with 'id' when server is ready
      
         const newReportList = [...ReportList,{...newReport,Name:Auth.user.Name,DateofReport:(new Date()).toJSON()}] ; // assume to be new report list fetched from server
         localStorage.setItem('report_list',JSON.stringify(newReportList))
@@ -25,16 +28,22 @@ export const ReportListProvider = ({ children }) => {
     }
     const updateReportList = (newReport,index) =>{
       // server code to add newReport to server 
-      
-      
-      const newReportList = [...[...ReportList].splice(index,1,{...newReport})] ; // assume to be new report list fetched from server
-      localStorage.setItem('report_list',JSON.stringify(newReportList))
-      setReportList(newReportList);
+      // change 'index' with 'id' when server is ready
+      const newReportList = [...ReportList];  // assume to be new report list fetched from server
+      localStorage.setItem('report_list',JSON.stringify([...newReportList.splice(index,1,newReport)]))
+      setReportList([...newReportList.splice(index,1,newReport)]);
+  }
+  const deleteReportList =(id)=>{ // until server comes into play index of range of no of Reports will be used
+// change 'index' with 'id' when server is ready
+    const newReportList = [...ReportList];  // assume to be new report list fetched from server
+    localStorage.setItem('report_list',JSON.stringify([...newReportList.splice(id,1)]))
+    setReportList([...newReportList.splice(id,1)]);
+
   }
   const [ReportList, setReportList] = useState(fetchReportList())
   
   return (
-    <ReportListContext.Provider value={{ ReportList,addReportList , updateReportList}}>
+    <ReportListContext.Provider value={{ ReportList,addReportList , updateReportList,initializeReportList,deleteReportList}}>
       {children}
     </ReportListContext.Provider>
   );
