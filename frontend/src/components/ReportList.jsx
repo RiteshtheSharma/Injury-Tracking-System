@@ -1,12 +1,31 @@
-import { Box,  Heading,Tip,} from "grommet";
+import { Box,Button,  Heading,Tip,Table,TableHeader,TableCell,TableBody,TableRow } from "grommet";
 import { useNavigate } from "react-router-dom";
-
+import { Trash } from "grommet-icons";
+import styled from "styled-components";
 const ReportList = ({ReportData}) => {
   const getProperDateString = (DateString) => {
     const dateVar = new Date(DateString);
     return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()}`;
   };
+  const getRenderingName = (Name)=> {
+    const nameLength = Name.length 
+    let newname ;
+    if(nameLength<=15) {newname = Name;
+        
+      for(let i=0 ;i<15 - nameLength;i++){ newname +=" "; }
+    }
+   
+    else newname = Name.slice(0,15) ;
+    console.log(nameLength,newname.length,newname,Name);
+    return newname}
+  
   const Navigate = useNavigate();
+  const ModTableCell = styled(TableCell)`
+  {
+    padding:0;
+  }
+  
+  `
 
   return (
     <Box style={{ width: "100%" }}>
@@ -14,34 +33,36 @@ const ReportList = ({ReportData}) => {
         List of Reports{" "}
       </Heading>
       <Box>
-        <ul style={{padding:"0"}}>
-        <li style={{ display: "flex", justifyContent: "space-between",padding:"5px 2px",boxShadow:"rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }}
+        <Table style={{fontSize:"12px"}}>
+        <TableHeader 
  >
-       <Box style={{textAlign:"left",flex:"1",fontSize:"23px",fontFamily:"cursive",fontWeight:"bolder"}}>Name</Box>
-       <Box style={{textAlign:"justify",fontSize:"23px",fontFamily:"cursive",fontWeight:"bolder"}}>Report date</Box>
-       <Box  style={{flex:"1",textAlign:"right",fontSize:"23px",fontFamily:"cursive",fontWeight:"bolder"}}>Injury date</Box>
- </li>
+       <ModTableCell scope="col" border="bottom" >Name</ModTableCell>
+       <ModTableCell scope="col" border="bottom" >Report date</ModTableCell>
+       <ModTableCell scope="col" border="bottom"  >Injury date</ModTableCell>
+       <ModTableCell scope="col" border="bottom"  ></ModTableCell>
+ </TableHeader>
+ <TableBody>
         {ReportData?.map((Report, index) => {
          
   return (
   
-    <li
+    <TableRow 
       key={index}
-      style={{ display: "flex", justifyContent: "space-between",padding:"5px 2px",boxShadow:"rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }}
-    onClick={()=>{Navigate(`/report/${index}`)}}
+         onClick={()=>{Navigate(`/report/${index}`)}}
     >
-     
-    <Tip content={<span style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{Report.Name}</span>}
+    
+     <ModTableCell> <Tip content={<pre style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{getRenderingName(Report.Name)}</pre>}
     plain 
    >
-      <Box style={{textAlign:"left",flex:"1"}}>{Report.Name}</Box>
-    </Tip>   
-      <Box style={{textAlign:"justify",alignSelf:"center"}}>{getProperDateString(Report.DateofReport)}</Box>
-      <Box style={{flex:"1",textAlign:"right",alignSelf:"center"}}>{getProperDateString(Report.DateofInjury)}</Box>
-    </li>
+      <pre >{getRenderingName(Report.Name)}</pre>
+    </Tip>   </ModTableCell>
+      <ModTableCell ><p >{getProperDateString(Report.DateofReport)}</p></ModTableCell>
+      <ModTableCell ><p >{getProperDateString(Report.DateofInjury)}</p></ModTableCell>
+      <ModTableCell style={{alignItems:"end"}} ><Button  size="small"  plain={false} icon={<Trash  size="small" />} /></ModTableCell>
+    </TableRow>
   );
 })}
-        </ul>
+</TableBody> </Table>
         
       </Box>
     </Box>
