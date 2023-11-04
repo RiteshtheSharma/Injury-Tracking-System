@@ -11,12 +11,13 @@ import { useAuth } from "./components/Context/AuthContext";
 
 import { useEffect } from "react";
 import Report from "./components/Report";
+import { useReportList } from "./components/Context/ReportListContext";
 function App() {
  const auth = useAuth();
-
+const ReportListFuncObj = useReportList() ;
  useEffect(() => {
    auth.setuser(JSON.parse(auth?.user))
- 
+   ReportListFuncObj.initializeReportList()
    
  }, [])
  
