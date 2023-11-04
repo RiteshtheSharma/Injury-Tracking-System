@@ -10,7 +10,7 @@ import {useReportList} from './Context/ReportListContext'
 const NewReport = () => {
 
   const ReportListObject = useReportList();
-  const updateReportList = ReportListObject.updateReportList;
+  const addReportList = ReportListObject.addReportList;
   const [BackInjuryPoints, setBackInjuryPoints] = useState(
     localStorage.getItem("new_report") === null
       ? {}
@@ -101,7 +101,7 @@ const handleAddToReports =()=>{
   if(DateofInjury.length>0 && (Object.keys(BackInjuryPoints).length>0 || Object.keys(FrontInjuryPoints).length>0) ) {
      // writing the code to save the new report with injury points to server is left
   
-  updateReportList(JSON.parse(localStorage.getItem('new_report')))
+  addReportList(JSON.parse(localStorage.getItem('new_report')))
   handleClearAllPoints()
   }
  else 

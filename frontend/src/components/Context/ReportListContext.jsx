@@ -15,7 +15,7 @@ export const ReportListProvider = ({ children }) => {
       ReportData = SampleReportData;}
         return ReportData;
     }
-    const updateReportList = (newReport) =>{
+    const addReportList = (newReport) =>{
         // server code to add newReport to server 
         
      
@@ -23,10 +23,18 @@ export const ReportListProvider = ({ children }) => {
         localStorage.setItem('report_list',JSON.stringify(newReportList))
         setReportList(newReportList);
     }
+    const updateReportList = (newReport,index) =>{
+      // server code to add newReport to server 
+      
+      
+      const newReportList = [...[...ReportList].splice(index,1,{...newReport})] ; // assume to be new report list fetched from server
+      localStorage.setItem('report_list',JSON.stringify(newReportList))
+      setReportList(newReportList);
+  }
   const [ReportList, setReportList] = useState(fetchReportList())
   
   return (
-    <ReportListContext.Provider value={{ ReportList,updateReportList }}>
+    <ReportListContext.Provider value={{ ReportList,addReportList , updateReportList}}>
       {children}
     </ReportListContext.Provider>
   );
