@@ -30,14 +30,16 @@ export const ReportListProvider = ({ children }) => {
       // server code to add newReport to server 
       // change 'index' with 'id' when server is ready
       const newReportList = [...ReportList];  // assume to be new report list fetched from server
-      localStorage.setItem('report_list',JSON.stringify([...newReportList.splice(index,1,newReport)]))
-      setReportList([...newReportList.splice(index,1,newReport)]);
+      newReportList.splice(index,1,newReport)
+      localStorage.setItem('report_list',JSON.stringify([...newReportList]))
+      setReportList([...newReportList]);
   }
   const deleteReportList =(id)=>{ // until server comes into play index of range of no of Reports will be used
 // change 'index' with 'id' when server is ready
     const newReportList = [...ReportList];  // assume to be new report list fetched from server
-    localStorage.setItem('report_list',JSON.stringify([...newReportList.splice(id,1)]))
-    setReportList([...newReportList.splice(id,1)]);
+    newReportList.splice(id,1)
+    localStorage.setItem('report_list',JSON.stringify([...newReportList]))
+    setReportList([...newReportList]);
 
   }
   const [ReportList, setReportList] = useState(fetchReportList())
