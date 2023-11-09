@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TableCell } from "grommet";
+import { TableCell,Skeleton } from "grommet";
 import { Link } from "react-router-dom";
 const ModTableCell = styled(TableCell)`
 {
@@ -15,4 +15,7 @@ color:black;
   color:#7D4CDB;
 }
 }`;
-export {ModLink,ModTableCell};
+const ModLinearSkeleton =styled(Skeleton)`{
+  margin-top:2px;
+}`
+export {ModLink,ModTableCell,ModLinearSkeleton};
