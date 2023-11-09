@@ -24,18 +24,19 @@ const Profile = () => {
   const auth = useAuth(); /* will come in use later */
   const ReportListContextObject = useReportList();
 
-  const {email,pwd} = auth.user;
+  const {email,Name,profileImg} = auth.user;
   const ReportListReducer = (Reports, action) => {
     switch (action.type) {
       case "reinitialize":
-        return [...action.newReport];
+       
+        return [...action?.newReport];
       case "search":
         return [
           ...Reports.filter(
             (report) =>
               report["Name"]
                 .toLowerCase()
-                .indexOf(action.searchName.toLowerCase()) > -1
+                .indexOf(action?.searchName.toLowerCase()) > -1
           ),
         ];
 
@@ -109,11 +110,16 @@ const Profile = () => {
         FilterPropertyCompValue: ReportFeature.DateOfReportEndDate,
       });
   };
+  useEffect(() => {
+   ReportListContextObject.initializeReportList();
+    ReportListdispatch({type:"reinitialize",newReport: ReportListContextObject.ReportList})
+  }, [ReportListContextObject.ReportList])
+  
   return (
     <Box align="center" pad="medium">
       <UserInfo
-        userName={"User name"}
-        profileImg={"https://avatars.githubusercontent.com/u/72566311?v=4"}
+        userName={Name}
+        profileImg={profileImg}
         emailID={email}
       />
       <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>

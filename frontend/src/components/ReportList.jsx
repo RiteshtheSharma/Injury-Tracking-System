@@ -1,35 +1,33 @@
-import { Box,Button,  Heading,Tip,Table,TableHeader,TableCell,TableBody,TableRow } from "grommet";
-import { useNavigate } from "react-router-dom";
+import { Box,Button,  Heading,Tip,Table,TableHeader,Skeleton,TableBody,TableRow } from "grommet";
 import { Trash } from "grommet-icons";
-import styled from "styled-components";
+import { ModLink,ModTableCell,ModLinearSkeleton } from "./StyledComponents";
+import { useReportList } from "./Context/ReportListContext";
+import { useAuth } from "./Context/AuthContext";
+
 const ReportList = ({ReportData}) => {
   const getProperDateString = (DateString) => {
     const dateVar = new Date(DateString);
     return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()}`;
   };
   const getRenderingName = (Name)=> {
-    const nameLength = Name.length 
+    const nameLength = Name?.length 
     let newname ;
     if(nameLength<=15) {newname = Name;
         
       for(let i=0 ;i<15 - nameLength;i++){ newname +=" "; }
     }
    
-    else newname = Name.slice(0,15) ;
-    console.log(nameLength,newname.length,newname,Name);
+    else newname = Name?.slice(0,12)+"..." ;
+   
     return newname}
   
-  const Navigate = useNavigate();
-  const ModTableCell = styled(TableCell)`
-  {
-    padding:0;
-  }
-  
-  `
+ 
+const reportListContextObj = useReportList();
+const Auth = useAuth()
 
   return (
     <Box style={{ width: "100%" }}>
-      <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>
+     {ReportData?.length>0 && <> <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>
         List of Reports{" "}
       </Heading>
       <Box>
@@ -48,23 +46,31 @@ const ReportList = ({ReportData}) => {
   
     <TableRow 
       key={index}
-         onClick={()=>{Navigate(`/report/${index}`)}}
+        
     >
     
      <ModTableCell> <Tip content={<pre style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{getRenderingName(Report.Name)}</pre>}
     plain 
    >
-      <pre >{getRenderingName(Report.Name)}</pre>
+      <ModLink to={`/report/${index}`}><pre >{getRenderingName(Report.Name)}</pre></ModLink>
     </Tip>   </ModTableCell>
-      <ModTableCell ><p >{getProperDateString(Report.DateofReport)}</p></ModTableCell>
-      <ModTableCell ><p >{getProperDateString(Report.DateofInjury)}</p></ModTableCell>
-      <ModTableCell style={{alignItems:"end"}} ><Button  size="small"  plain={false} icon={<Trash  size="small" />} /></ModTableCell>
+      <ModTableCell ><p ><ModLink to={`/report/${index}`}>{getProperDateString(Report.DateofReport)}</ModLink></p></ModTableCell>
+      <ModTableCell ><p ><ModLink to={`/report/${index}`}>{getProperDateString(Report.DateofInjury)}</ModLink></p></ModTableCell>
+      <ModTableCell style={{alignItems:"end"}} >{(Report.Name === Auth.user.Name) && <Button onClick={()=>reportListContextObj.deleteReportList(index)} size="small" style={{padding:"4px"}} plain={false} icon={<Trash  size="small" />} />}</ModTableCell>
     </TableRow>
   );
-})}
-</TableBody> </Table>
-        
-      </Box>
+})} 
+</TableBody> </Table> 
+       
+      </Box></> }
+      {
+  !ReportData?.length>0 &&
+  <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>
+        No report found
+      </Heading>
+
+
+}
     </Box>
   );
 };
