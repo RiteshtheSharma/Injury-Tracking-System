@@ -3,21 +3,24 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setuser] = useState( localStorage.getItem("user") === null ?"{}":localStorage.getItem("user"));
+  const [user, setuser] = useState( localStorage.getItem("user") === null ?{}:JSON.parse(localStorage.getItem("user")));
  
   const login = (email,pwd) => {
     const Name = "userName" // will be replaced by server fetched user name
-    setuser({email,pwd,Name});
-    localStorage.setItem("user",JSON.stringify({email,pwd,Name}));
-    navigate('/profile')
+    const profileImg ="https://avatars.githubusercontent.com/u/72566311?v=4"
+    setuser({email,pwd,Name,profileImg});
+    localStorage.setItem("user",JSON.stringify({email,pwd,Name,profileImg}));
+    
   };
   const signin = (username,email,pwd)=>{
     const Name = username ;
-    setuser({email,pwd,Name});
-    localStorage.setItem("user",JSON.stringify({email,pwd,Name}))
-  }
+    const profileImg ="https://avatars.githubusercontent.com/u/72566311?v=4"
+    setuser({email,pwd,Name,profileImg});
+    localStorage.setItem("user",JSON.stringify({email,pwd,Name,profileImg}))
+  } 
+
   const logout = () => {
-    setuser("{}");
+    setuser({});
     localStorage.clear()
     console.log("executed logout");
     navigate('');
