@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { SampleReportData } from "../SampleData";
 import {useAuth} from './AuthContext'
 const ReportListContext= createContext(null);
 export const ReportListProvider = ({ children }) => {
@@ -10,9 +9,728 @@ export const ReportListProvider = ({ children }) => {
         if(localStorage.getItem('report_list')!==null)
               ReportData = JSON.parse(localStorage.getItem('report_list'));
          else   
-        {localStorage.setItem('report_list',JSON.stringify(SampleReportData)) 
+        {// assume being fetched by server first time
+          ReportData = [
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+          {
+            "DateofInjury": "2023-10-30T12:03",
+            "backInjuryPoints": {
+              "b24": {
+                "label": "head back",
+                "description": ""
+              }
+            },
+            "frontInjuryPoints": {
+              "f264": {
+                "label": "nunnu",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T09:59:35.172Z"
+          },
+          {
+            "DateofInjury": "2023-06-26T16:04",
+            "backInjuryPoints": {
+              "b265": {
+                "label": "rigth butt",
+                "description": "hurt"
+              }
+            },
+            "frontInjuryPoints": {
+              "f273": {
+                "label": "palm",
+                "description": ""
+              }
+            },
+            "Name": "userName",
+            "DateofReport": "2023-11-05T10:00:20.977Z"
+          },
+        ]; 
+        
+          
+          localStorage.setItem('report_list',JSON.stringify(ReportData)) 
       
-      ReportData = SampleReportData;}
+      }
         return ReportData;
     }
     const initializeReportList=()=>{
@@ -42,7 +760,7 @@ export const ReportListProvider = ({ children }) => {
     setReportList([...newReportList]);
 
   }
-  const [ReportList, setReportList] = useState(fetchReportList())
+  const [ReportList, setReportList] = useState([{}])
   
   return (
     <ReportListContext.Provider value={{ ReportList,addReportList , updateReportList,initializeReportList,deleteReportList}}>
