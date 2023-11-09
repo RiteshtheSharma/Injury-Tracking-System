@@ -33,7 +33,7 @@ const Report = () => {
       const url = window.location.href;
     const index = parseInt((url).slice(url.lastIndexOf("/")+1))
     const report = (ReportListContextObj.ReportList)[index] ;
-    console.log(ReportListContextObj.ReportList," in Report")
+    console.log(JSON.stringify(ReportListContextObj.ReportList,null,2))
     const isInjuryPointId = (id) => {
         const idBodyTypePart = id.slice(0, 1);
         if (idBodyTypePart === "b") return Object.hasOwn(BackInjuryPoints, id);
@@ -89,7 +89,7 @@ const handleOnClickUpdateChange = ()=>{
 }
 const navigate = useNavigate();
 const handleOnClickDeleteReport = ()=>{ReportListContextObj.deleteReportList(index);
-navigate('profile')
+navigate('/profile')
 
 }
 const auth = useAuth();
@@ -106,7 +106,7 @@ const auth = useAuth();
     </Box>
     
         <Box direction="row" wrap pad="xxsmall"> <span style={{textDecoration : "underline"}}>Report Date</span> : <span style={{alignItems:"center"}}>{ getProperDateString(report?.DateofReport)}</span></Box>
-        <Box pad="xxsmall" direction="row" style={{alignItems:"center",flexWrap:"wrap"}}><span style={{textDecoration : "underline"}}>Injury Date</span> : {BtnState==="change"?(<Box direction="row" style={{alignItems:"center"}}><span>{getProperDateString(newDateofInjury)}</span><Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/></Box>):<Box direction="row"><SmallestDateComponent label="" labelFontSize={"20px"} gap={"10px"} inputType={"datetime-local"} setval={ setnewDateofInjury} val={newDateofInjury} greaterDateLimit={report?.DateofReport}/>  
+        <Box pad="xxsmall" direction="row" style={{alignItems:"center",flexWrap:"wrap"}}><span style={{textDecoration : "underline"}}>Injury Date</span> : {BtnState==="change" && (auth.user.Name === report?.Name )?(<Box direction="row" style={{alignItems:"center"}}><span>{getProperDateString(newDateofInjury)}</span>{(auth.user.Name === report?.Name ) && <Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/>}</Box>):<Box direction="row"><SmallestDateComponent label="" labelFontSize={"20px"} gap={"10px"} inputType={"datetime-local"} setval={ setnewDateofInjury} val={newDateofInjury} greaterDateLimit={report?.DateofReport}/>  
         <Button size="small" pad="xxsmall" style={{marginLeft:"10px"}} label={BtnState} onClick={()=>setBtnState(BtnState==="change"?"update":"change")}/></Box>
   } </Box>
       </Box>
@@ -119,9 +119,10 @@ const auth = useAuth();
           <BodyInjuryComponent BodySecName={"Front body section"} ImgUrl={FrontBodyImg} togglePoints={toggleFrontPoints} InjuryPoints={FrontInjuryPoints}  />
   
       </Box>
-      
-    <Button primary pad={"medium"} label="Update change"   onClick={handleOnClickUpdateChange} />
-    <Button primary pad={"medium"} label="Delete"   onClick={handleOnClickDeleteReport} />
+      {/* will replace by ids comparasion in future */}
+      {auth.user.Name === report?.Name && 
+    <Box gap="small" ><Button primary pad={"medium"} label="Update change"   onClick={handleOnClickUpdateChange} />
+    <Button primary pad={"medium"} label="Delete"   onClick={handleOnClickDeleteReport} /></Box >}
 
   </Box>
   )
