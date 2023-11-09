@@ -12,12 +12,19 @@ import { useAuth } from "./components/Context/AuthContext";
 import { useEffect } from "react";
 import Report from "./components/Report";
 import { useReportList } from "./components/Context/ReportListContext";
+import Settings from "./components/Settings";
 function App() {
  const auth = useAuth();
 const ReportListFuncObj = useReportList() ;
  useEffect(() => {
-   auth.setuser(JSON.parse(auth?.user))
-   ReportListFuncObj.initializeReportList()
+  
+  if(localStorage.getItem('user')!==null  )
+  {ReportListFuncObj.initializeReportList()
+  
+  
+  }
+   auth.setuser(auth?.user) 
+  
    
  }, [])
  
@@ -27,6 +34,7 @@ const ReportListFuncObj = useReportList() ;
       
         <NavigationBar />
         <Routes>
+        <Route path="/" element={"home"}/>
         <Route path="login" element={
          <AuthComp type={"Log In"}>
             <LogInForm />
@@ -44,7 +52,7 @@ const ReportListFuncObj = useReportList() ;
           />
            <Route path="logout" element={<RequireAuth><Logout /></RequireAuth>} />
            <Route path="newreport" element={<RequireAuth><NewReport/></RequireAuth>} />
-           <Route path="settings" element={<RequireAuth>{"settings"}</RequireAuth>} />
+           <Route path="settings" element={<RequireAuth><Settings/></RequireAuth>} />
            <Route path="report/:id" element={<RequireAuth><Report/></RequireAuth>} />
         </Routes></>
      
