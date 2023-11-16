@@ -20,7 +20,7 @@ const UserInfo = ({userName,profileImg,emailID}) => {
         setlinkStyle({ textDecoration: "none", color: "#1F2328" });
       };
     
-     console.log(emailID,"in userInfo");
+   
   return (
     <>
     <Avatar

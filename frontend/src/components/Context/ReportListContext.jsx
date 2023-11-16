@@ -11,7 +11,7 @@ export const ReportListProvider = ({ children }) => {
          else   
         {// assume being fetched by server first time
           ReportData = [
-          {
+          { 
             "DateofInjury": "2023-10-30T12:03",
             "backInjuryPoints": {
               "b24": {

@@ -1,6 +1,6 @@
-import { Box,Button,  Heading,Tip,Table,TableHeader,Skeleton,TableBody,TableRow } from "grommet";
+import { Box,Button,  Heading,Tip,Table,TableHeader,Skeleton,TableRow } from "grommet";
 import { Trash } from "grommet-icons";
-import { ModLink,ModTableCell,ModLinearSkeleton } from "./StyledComponents";
+import { ModLink,ModTableCell,ModLinearSkeleton,TableBodyWithScrollBar } from "./StyledComponents";
 import { useReportList } from "./Context/ReportListContext";
 import { useAuth } from "./Context/AuthContext";
 
@@ -27,19 +27,23 @@ const Auth = useAuth()
 
   return (
     <Box style={{ width: "100%" }}>
-     {ReportData?.length>0 && <> <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>
+     {ReportData?.length>0 && <> <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "30px" }}>
         List of Reports{" "}
       </Heading>
-      <Box>
-        <Table style={{fontSize:"12px"}}>
+     
+        <table style={{fontSize:"12px" ,height:"250px",overflow:"scroll"}}>
         <TableHeader 
+      
+        style={{width:"inherit" ,boxSizing:"border-box",}}
  >
-       <ModTableCell scope="col" border="bottom" >Name</ModTableCell>
-       <ModTableCell scope="col" border="bottom" >Report date</ModTableCell>
-       <ModTableCell scope="col" border="bottom"  >Injury date</ModTableCell>
-       <ModTableCell scope="col" border="bottom"  ></ModTableCell>
+       <ModTableCell scope="col" border="bottom" flex="1">Name</ModTableCell>
+       <ModTableCell scope="col" border="bottom" flex="1">Report date</ModTableCell>
+       <ModTableCell scope="col" border="bottom"  flex="1">Injury date</ModTableCell>
+       <ModTableCell scope="col" border="bottom"  flex="1"></ModTableCell>
  </TableHeader>
- <TableBody>
+ 
+ <TableBodyWithScrollBar  >
+ 
         {ReportData?.map((Report, index) => {
          
   return (
@@ -56,13 +60,13 @@ const Auth = useAuth()
     </Tip>   </ModTableCell>
       <ModTableCell ><p ><ModLink to={`/report/${index}`}>{getProperDateString(Report.DateofReport)}</ModLink></p></ModTableCell>
       <ModTableCell ><p ><ModLink to={`/report/${index}`}>{getProperDateString(Report.DateofInjury)}</ModLink></p></ModTableCell>
-      <ModTableCell style={{alignItems:"end"}} >{(Report.Name === Auth.user.Name) && <Button onClick={()=>reportListContextObj.deleteReportList(index)} size="small" style={{padding:"4px"}} plain={false} icon={<Trash  size="small" />} />}</ModTableCell>
+      <ModTableCell style={{alignItems:"center"}} >{(Report.Name === Auth.user.Name) && <Button onClick={()=>reportListContextObj.deleteReportList(index)} size="small" style={{padding:"4px"}} plain={false} icon={<Trash  size="small" />} />}</ModTableCell>
     </TableRow>
   );
 })} 
-</TableBody> </Table> 
+</TableBodyWithScrollBar></table> 
        
-      </Box></> }
+      </> }
       {
   !ReportData?.length>0 &&
   <Heading level={2} style={{ alignSelf: "flex-start", marginBottom: "0" }}>

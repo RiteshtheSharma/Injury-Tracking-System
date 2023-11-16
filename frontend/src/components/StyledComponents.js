@@ -7,6 +7,12 @@ const ModTableCell = styled(TableCell)`
 }
 
 `;
+const TableBodyWithScrollBar = styled.tbody`
+ {height: 200px; 
+  overflow: scroll; 
+ 
+ 
+}`
 const ModLink = styled(Link)`
 {
 text-decoration:none;
@@ -18,4 +24,5 @@ color:black;
 const ModLinearSkeleton =styled(Skeleton)`{
   margin-top:2px;
 }`
-export {ModLink,ModTableCell,ModLinearSkeleton};
+
+export {ModLink,ModTableCell,ModLinearSkeleton,TableBodyWithScrollBar};

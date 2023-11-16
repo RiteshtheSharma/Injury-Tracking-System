@@ -1,4 +1,8 @@
 /* search text input 's parent element form class */ 
+body{
+  max-height:150vh;
+  overflow-y: auto;
+}
 .DataForm__MaxForm-sc-v64e1r-1.ieQZSt{
     width:100%;
     padding-right: 10px;
@@ -12,4 +16,5 @@
   .lbAlAW img{
     flex-shrink:0;
     border-radius: 100%;
-  }
+  } 
+  
