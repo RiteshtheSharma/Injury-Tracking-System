@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
     setuser({email,pwd,Name,profileImg});
     localStorage.setItem("user",JSON.stringify({email,pwd,Name,profileImg}))
   } 
-
+  const updateUserDetails = (property,value)=>{
+ setuser({...user,[property]:value})
+  }
   const logout = () => {
     setuser({});
     localStorage.clear()
@@ -27,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user,setuser, login,signin, logout  }}>
+    <AuthContext.Provider value={{ user,updateUserDetails, login,signin, logout,setuser  }}>
       {children}
     </AuthContext.Provider>
   );
