@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   } 
   const updateUserDetails = (property,value)=>{
  setuser({...user,[property]:value})
+ localStorage.setItem("user",JSON.stringify({...user,[property]:value}))
   }
   const logout = () => {
     setuser({});
