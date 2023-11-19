@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import Report from "./components/Report";
 import { useReportList } from "./components/Context/ReportListContext";
 import Settings from "./components/Settings";
+import Home from "./components/Home";
+import Footer from "./components/Footer";
 function App() {
  const auth = useAuth();
 const ReportListFuncObj = useReportList() ;
@@ -34,7 +36,7 @@ const ReportListFuncObj = useReportList() ;
       
         <NavigationBar />
         <Routes>
-        <Route path="/" element={"home"}/>
+        <Route path="/" element={<Home/>}/>
         <Route path="login" element={
          <AuthComp type={"Log In"}>
             <LogInForm />
@@ -54,8 +56,10 @@ const ReportListFuncObj = useReportList() ;
            <Route path="newreport" element={<RequireAuth><NewReport/></RequireAuth>} />
            <Route path="settings" element={<RequireAuth><Settings/></RequireAuth>} />
            <Route path="report/:id" element={<RequireAuth><Report/></RequireAuth>} />
-        </Routes></>
-     
+        </Routes>
+        <Footer/>
+        </>
+   
   
   );
 }

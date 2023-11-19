@@ -15,7 +15,7 @@ const LogInForm = () => {
     navigate(redirectPath, { replace: true });
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{flex:"auto",}}>
     <TextInput type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
     <TextInput type="password" placeholder="Password" value={pwd} onChange={(e)=>setPwd(e.target.value)} />
     <Button type="submit" label="Login In" primary style={{borderRadius:"5px", width:"100%"}}/>

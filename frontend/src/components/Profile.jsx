@@ -116,7 +116,7 @@ const Profile = () => {
   }, [ReportListContextObject.ReportList])
   
   return (
-    <Box align="center" pad="medium">
+    <Box align="center" pad="medium" style={{flex:"auto",height: "fit-content",minHeight:"unset"}}>
       <UserInfo
         userName={Name}
         profileImg={profileImg}

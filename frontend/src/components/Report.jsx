@@ -94,7 +94,7 @@ navigate('/profile')
 }
 const auth = useAuth();
   return (
-    <Box  pad="large" gap="10px">
+    <Box  pad="large" gap="10px" style={{flex:"auto",minHeight:"unset",height:"fit-content"}}>
     <Box style={{minHeight:"auto",alignText:"left"}} >
     <Box style={{padding:"10px 0"}}> 
     <UserInfo

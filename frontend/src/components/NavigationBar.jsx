@@ -5,6 +5,7 @@ import NavMenu from "./NavMenu";
 import NavBtnGrpBeforeAuth from "./NavBtnGrpBeforeAuth";
 import NavBtnGrpAfterAuth from "./NavBtnGrpAfterAuth";
 import { useResponsiveScreen } from "./Context/ResponsiveScreenContext";
+import { ModLink } from "./StyledComponents";
 const NavigationBar = () => {
   const navigate = useNavigate();
   const auth = useAuth();
@@ -13,9 +14,9 @@ const NavigationBar = () => {
 
   return (
     <Header background="light-2" pad={( responsiveWidth.windowWidth>660)?"medium":""}>
-      <Box direction="row" align="center" gap="small" style={{paddingLeft:"18px"}}>
+      <ModLink to="/" direction="row" align="center" gap="small" style={{paddingLeft:"18px"}} >
         ITS
-      </Box>
+      </ModLink>
       {
         responsiveWidth. windowWidth>660 ?( (Object.keys(auth.user).length < 1 || localStorage.getItem("user")===null)? (
       <NavBtnGrpBeforeAuth/>
