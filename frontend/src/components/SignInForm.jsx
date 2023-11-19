@@ -18,7 +18,8 @@ const SignInForm = () => {
     else alert("Password must match with confirm password");
   };
   return (
-    <form onSubmit={handleSubmit}>
+   
+    <form onSubmit={handleSubmit} >
     <TextInput type="username" placeholder="User Name" value={username} onChange={(e)=>setusername(e.target.value)}/>
     <TextInput type="email" placeholder="Email" value={Email} onChange={(e)=>setEmail(e.target.value)}/>
     <TextInput type="password" placeholder="Password" value={pwd} onChange={(e)=>setpwd(e.target.value)}/>
