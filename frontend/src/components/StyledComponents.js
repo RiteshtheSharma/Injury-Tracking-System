@@ -10,7 +10,7 @@ const ModTableCell = styled(TableCell)`
 
 `;
 const TableBodyWithScrollBar = styled.tbody`
- {height: 200px; 
+ {
   overflow: scroll; 
  
  
