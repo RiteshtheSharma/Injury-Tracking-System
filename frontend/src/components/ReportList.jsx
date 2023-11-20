@@ -7,7 +7,7 @@ import { useAuth } from "./Context/AuthContext";
 const ReportList = ({ReportData}) => {
   const getProperDateString = (DateString) => {
     const dateVar = new Date(DateString);
-    return `${dateVar.getDate()}\/${dateVar.getMonth()}\/${dateVar.getFullYear()}`;
+    return `${dateVar.getDate()}\/${dateVar.getMonth()+1}\/${dateVar.getFullYear()}`;
   };
   const getRenderingName = (Name)=> {
     const nameLength = Name?.length 
@@ -31,7 +31,7 @@ const Auth = useAuth()
         List of Reports{" "}
       </Heading>
      
-        <table style={{fontSize:"12px" ,height:"250px",overflow:"scroll"}}>
+        <table style={{fontSize:"12px" ,overflow:"scroll"}}>
         <TableHeader 
       
         style={{width:"inherit" ,boxSizing:"border-box",}}
@@ -53,7 +53,7 @@ const Auth = useAuth()
         
     >
     
-     <ModTableCell> <Tip content={<pre style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{getRenderingName(Report.Name)}</pre>}
+     <ModTableCell> <Tip content={<pre style={{backgroundColor:"white",fontFamily:"monospace",fontSize:"12px",width:"fit-content"}}>{Report.Name}</pre>}
     plain 
    >
       <ModLink to={`/report/${index}`}><pre >{getRenderingName(Report.Name)}</pre></ModLink>
