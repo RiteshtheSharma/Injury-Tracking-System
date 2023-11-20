@@ -1,7 +1,5 @@
 import { Card, CardHeader, Button,CardBody } from 'grommet';
 import { Google } from 'grommet-icons';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { useResponsiveScreen } from './Context/ResponsiveScreenContext';
 const AuthComp = ({type,children}) => {
 const handleSignInWithGoogle = ()=>{};
