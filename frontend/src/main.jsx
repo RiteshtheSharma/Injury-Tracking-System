@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import theme from "./themes/globalTheme.js";
 import { Grommet } from "grommet";
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
-import { ReportSearchProvider } from "./components/Context/ReportSearchContext.jsx";
+import { ReportSearchByDateProvider } from "./components/Context/ReportSearchByDateContext.jsx";
 import { ResponsiveScreenProvider } from "./components/Context/ResponsiveScreenContext.jsx";
 import { ReportListProvider} from "./components/Context/ReportListContext.jsx"
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,14 +14,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
     <ResponsiveScreenProvider>
     <AuthProvider>
-    <ReportSearchProvider>
+    <ReportSearchByDateProvider>
      <ReportListProvider>
       <Grommet theme={theme} full style={{display:"flex",flexDirection:"column"}}>
 
         <App />
       </Grommet>
    </ReportListProvider>
-      </ReportSearchProvider>
+      </ReportSearchByDateProvider>
       </AuthProvider>
     </ResponsiveScreenProvider>  
     </Router>

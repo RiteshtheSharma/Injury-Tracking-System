@@ -11,14 +11,14 @@ import {
 } from "grommet";
 import { useAuth } from "./Context/AuthContext";
 import DateFilterComponent from "./DateFilterComponent";
-import { useReportFeature } from "./Context/ReportSearchContext";
+import { useReportByDateFeature} from "./Context/ReportSearchByDateContext";
 import { isValidDate } from "../NonReactCompFunc";
 import "../ProfileStyle.css";
 import ReportList from "./ReportList";
 import UserInfo from "./UserInfo";
 import {useReportList} from './Context/ReportListContext'
 const Profile = () => {
-  const ReportFeature = useReportFeature();
+  const ReportFeature = useReportByDateFeature();
   const [SortBy, setSortBy] = useState("");
   const [searchName, setsearchName] = useState("");
   const auth = useAuth(); /* will come in use later */
@@ -29,7 +29,7 @@ const Profile = () => {
     switch (action.type) {
       case "reinitialize":
        
-        return [...action?.newReport];
+        return [...action.newReport];
       case "search":
         return [
           ...Reports.filter(
@@ -109,12 +109,12 @@ const Profile = () => {
         operator: "lte",
         FilterPropertyCompValue: ReportFeature.DateOfReportEndDate,
       });
-  };
+        };
   useEffect(() => {
    ReportListContextObject.initializeReportList();
     ReportListdispatch({type:"reinitialize",newReport: ReportListContextObject.ReportList})
-  }, [ReportListContextObject.ReportList])
-  
+  }, [])
+  console.log()
   return (
     <Box align="center" pad="medium" style={{flex:"auto",height: "fit-content",minHeight:"unset"}}>
       <UserInfo
