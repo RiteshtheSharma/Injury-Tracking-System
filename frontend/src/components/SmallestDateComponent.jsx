@@ -44,7 +44,7 @@ const SmallestDateComponent = ({
     )
       setval(newDateVal);
       else 
-      alert(`Date value must be ${smallerDateLimitDateobj!==null?(">="+smallerDateLimitDateobj.toDateString()+" & "):""} ${"<="+greaterDateLimitDateobj.toDateString()}`)
+      alert(`Date value must be ${smallerDateLimitDateobj!==null?(">="+smallerDateLimitDateobj.toDateString()+" & "):""} ${greaterDateLimitDateobj!==null?"<="+greaterDateLimitDateobj.toDateString():"<="+(new Date()).toDateString()}`)
   };
   useEffect(() => {
     setIpStyle(getIpStyle());
