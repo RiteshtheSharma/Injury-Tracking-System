@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import {useAuth} from './AuthContext'
+import { SampleReportData } from "../SampleData";
 const ReportListContext= createContext(null);
 export const ReportListProvider = ({ children }) => {
     const Auth = useAuth();
@@ -725,6 +726,7 @@ export const ReportListProvider = ({ children }) => {
             "Name": "userName",
             "DateofReport": "2023-11-05T10:00:20.977Z"
           },
+          ...SampleReportData
         ]; 
         
           
