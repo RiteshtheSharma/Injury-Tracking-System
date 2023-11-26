@@ -1,35 +1,17 @@
-import { ModPencilIconLabel } from "./StyledComponents";
-import {Modal} from './Modal';
+import ImgInputSelector from './ImgInputSelector';
+import {Modal} from '../Modal';
 import { Button,Box,Text } from "grommet";
 import 'react-image-crop/dist/ReactCrop.css';
 import ReactCrop, {
     centerCrop,
     makeAspectCrop,
-    convertToPixelCrop,
+    
   } from 'react-image-crop'
-import { useState,useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { canvasPreview } from './canvasPreview'
 import { useDebounceEffect } from './useDebounceEffect'
-import { useAuth } from './Context/AuthContext';
-function centerAspectCrop(
-    mediaWidth,
-    mediaHeight,
-    aspect,
-  ) {
-    return centerCrop(
-      makeAspectCrop(
-        {
-          unit: '%',
-          width: 90,
-        },
-        aspect,
-        mediaWidth,
-        mediaHeight,
-      ),
-      mediaWidth,
-      mediaHeight,
-    )
-  }
+import PropTypes from 'prop-types'
+
   
 const ProfileImgEdit = ({setProfImg}) => {
     const [imgSrc, setImgSrc] = useState('')
@@ -51,6 +33,7 @@ const ProfileImgEdit = ({setProfImg}) => {
         )
         reader.readAsDataURL(e.target.files[0])
       }
+      
     }
   
     function onImageLoad(e) {
@@ -133,17 +116,12 @@ const ProfileImgEdit = ({setProfImg}) => {
    
    
   return (
-    <><ModPencilIconLabel htmlFor="file-input" className="pencil-icon">
-    <input id="file-input" type="file" accept="image/*"  onChange={(e) => {
-                       onSelectFile(e);
-                        setModalOpen(true);
-                    }}/>
-    </ModPencilIconLabel>
-    
+    <><ImgInputSelector  onImgChange={(e)=>{ onSelectFile(e);
+      setModalOpen(true);}}/>
     <Modal
           Open={ModalOpen}
           onClose = {()=>setModalOpen(null) }
-          Component={
+          >{
           <> 
     {!!imgSrc && (
       <>
@@ -186,14 +164,17 @@ const ProfileImgEdit = ({setProfImg}) => {
           </Box>
         </>
       )}</>
-          }
-        />
+          }</Modal>
     
    
         
         </>
         
   )
+}
+
+ProfileImgEdit.propTypes = {
+  setProfImg : PropTypes.func.isRequired
 }
 
 export default ProfileImgEdit
