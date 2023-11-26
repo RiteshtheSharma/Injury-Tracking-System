@@ -1,4 +1,4 @@
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./components/Navbar/NavigationBar";
 import AuthComp from "./components/AuthComp";
 import LogInForm from "./components/LoginForm";
 import SignInForm from "./components/SignInForm";
@@ -18,6 +18,9 @@ import Footer from "./components/Footer";
 function App() {
  const auth = useAuth();
 const ReportListFuncObj = useReportList() ;
+
+// initialize browser stored user data to Authcontext 's user usestate from localstorage
+// and initialize stored reports in local storage to report context 's corresponding usestate 
  useEffect(() => {
   
   if(localStorage.getItem('user')!==null  )

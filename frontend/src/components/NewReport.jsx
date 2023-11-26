@@ -3,19 +3,24 @@ import BackBodyImg from '../assets/back_body.png'
 import FrontBodyImg from "../assets/front_body.png"
 import { useResponsiveScreen } from './Context/ResponsiveScreenContext'
 import "../NewReport.css"
-import BodyInjuryComponent from './BodyInjuryComponent'
+import BodySideInjuryMapping from './BodySideInjuryMapping'
 import SmallestDateComponent from './SmallestDateComponent'
 import { useState } from 'react'
 import {useReportList} from './Context/ReportListContext'
+
 const NewReport = () => {
 
-  const ReportListObject = useReportList();
-  const addReportList = ReportListObject.addReportList;
+  const ReportListContextObject = useReportList();
+  const addReportList = ReportListContextObject.addReportList;
+// represents Injury points and has used localstorage to reinitialize the stored injury points being stored in localstorage 
+//( uses 'new_report' key to store the new report in following format {backInjuryPoints :{},frontInjuryPoints : {} ,DateofInjury:DateString } 
+// localstorage will keep it stored untill the newreport is added to database or user has logged out) while adding injurypoints using UI  
   const [BackInjuryPoints, setBackInjuryPoints] = useState(
     localStorage.getItem("new_report") === null
       ? {}
       : JSON.parse(localStorage.getItem("new_report"))?.backInjuryPoints
   );
+
   const syncNewReportToLocalStorage = (property,newValue)=>{
     if(localStorage.getItem('new_report') === null)
        localStorage.setItem('new_report','{}')
@@ -23,6 +28,7 @@ const NewReport = () => {
   
     localStorage.setItem("new_report",JSON.stringify(tempNewReportFromLocalStorage))
   }
+   // remove or add grid item as back  injury point
   const toggleBackPoints = (gridItemId, label = null, description = null) => {
     const tempBackInjuryPoints = { ...BackInjuryPoints };
    
@@ -43,6 +49,7 @@ const NewReport = () => {
       setBackInjuryPoints(newBackInjuryPoints);
     }
   };
+  // represents Injury points and has used localstorage to reinitialize the stored injury points being stored in localstorage while adding injurypoints using UI  
   const [FrontInjuryPoints, setFrontInjuryPoints] = useState(
     
       localStorage.getItem("new_report") === null
@@ -50,6 +57,7 @@ const NewReport = () => {
         : JSON.parse(localStorage.getItem("new_report")).frontInjuryPoints
   
   );
+    // remove or add grid item as front injury point
   const toggleFrontPoints = (gridItemId, label = null, description = null) => {
     const tempFrontInjuryPoints = { ...FrontInjuryPoints };
     if (!isInjuryPointId(gridItemId)) {
@@ -68,12 +76,13 @@ const NewReport = () => {
       setFrontInjuryPoints(newFrontInjuryPoints);
     }
   };
-
+// verify if grid item of html element with body section image as background image is injury point using its id 
   const isInjuryPointId = (id) => {
     const idBodyTypePart = id.slice(0, 1);
     if (idBodyTypePart === "b") return Object.hasOwn(BackInjuryPoints, id);
     else return Object.hasOwn(FrontInjuryPoints, id);
   };
+
   const clearALLInjuryPoints = ()=>{
     console.log("called in injuryContext")
     setBackInjuryPoints({});
@@ -88,6 +97,7 @@ const ResponsiveScreenWindow = useResponsiveScreen();
 const  [DateofInjury, setDateofInjury] = useState( localStorage.getItem("new_report") === null
 ? ""
 : JSON.parse(localStorage.getItem("new_report"))?.DateofInjury)
+
 const updateDateOfInjury = (newDate) =>{
 setDateofInjury(newDate)
 syncNewReportToLocalStorage("DateofInjury",newDate);
@@ -116,8 +126,8 @@ const handleAddToReports =()=>{
    <SmallestDateComponent label="Date of Injury" labelFontSize={"20px"} dir={"column"} gap={"10px"} inputType={"datetime-local"} setval={ updateDateOfInjury} val={DateofInjury} greaterDateLimit={new Date().toJSON()}/>  
     <Box direction='row' wrap justify="between" style={{marginTop:"auto",rowGap:"10px"}} >
 
-     <BodyInjuryComponent BodySecName={"Back body section"} ImgUrl={BackBodyImg} togglePoints={toggleBackPoints} InjuryPoints={BackInjuryPoints} />
-     <BodyInjuryComponent BodySecName={"Front body section"} ImgUrl={FrontBodyImg} togglePoints={toggleFrontPoints} InjuryPoints={FrontInjuryPoints}  />
+     <BodySideInjuryMapping BodySecName={"Back body section"} ImgUrl={BackBodyImg} togglePoints={toggleBackPoints} InjuryPoints={BackInjuryPoints} />
+     <BodySideInjuryMapping BodySecName={"Front body section"} ImgUrl={FrontBodyImg} togglePoints={toggleFrontPoints} InjuryPoints={FrontInjuryPoints}  />
        
        
     </Box>

@@ -1,8 +1,13 @@
+// component description : provides a card framework for login, signin and user credential change form 
+// with google authentication 
 import { Card, CardHeader, Button,CardBody } from 'grommet';
 import { Google } from 'grommet-icons';
 import { useResponsiveScreen } from './Context/ResponsiveScreenContext';
+import PropTypes from "prop-types";
 const AuthComp = ({type,children}) => {
-const handleSignInWithGoogle = ()=>{};
+const handleSignInWithGoogle = ()=>{
+  // will be implemented when frontend integrated with server
+};
 const responsiveWidth = useResponsiveScreen();
   return (
 
@@ -22,5 +27,11 @@ const responsiveWidth = useResponsiveScreen();
     </Card>
   )
 }
-
+AuthComp.propTypes = {
+  type:PropTypes.string.isRequired ,
+  children :  PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+}
 export default AuthComp

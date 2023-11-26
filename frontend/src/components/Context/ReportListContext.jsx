@@ -1,3 +1,26 @@
+// context for report data of all the users in database fetched for admin (if user is a person of authority) user or only the data of normal user himself/herself  
+//the reportlist data can be represented by following json form  [ {DateofInjury:"dateTimeString",Name:"username",_id:"string represent user id as report foreign key"
+//                                                                   ,DateofReport:"dateTimeString",
+//                                                                  "backInjuryPoints": {
+//              ...,
+//              "b[0-511]": {
+//               "label": "string",
+//                "description": "string"
+//              },
+//               ...
+//            },
+//            "frontInjuryPoints": {
+//                ...,
+//              "f[0-511]": {
+//                "label": "string",
+//                "description": "string"
+//              }, ...
+//            }, } ,... ]
+// in each report object (element of reportlist array ) backInjuryPoints & frontInjuryPoints represent injury points marked at body 's back section image 
+// and front section image respectively where each property of any (backInjuryPoints & frontInjuryPoints->InjuryPoint) of them represents the injury point in form of grid item 
+// number (as represented by numerical part of reach InjuryPoint 's property) as numbered in matrix of grid at which injury can be marked as representative of 
+//actual injury of patient , each property of InjuryPoint have same name as ids of the grid item of html element having (front/back)Body section background image 
+// there can be 0-512 injuryPoint properties as there are 512 grid items of html element having (front/back)Body section background image 
 import { createContext, useContext, useState } from "react";
 import {useAuth} from './AuthContext'
 import { SampleReportData } from "../SampleData";
@@ -736,11 +759,13 @@ export const ReportListProvider = ({ children }) => {
         return ReportData;
     }
     const initializeReportList=()=>{
-      setReportList(fetchReportList())
+      const fetchedReportList = fetchReportList();
+      setReportList(fetchedReportList)
+      return fetchedReportList
     }
     const addReportList = (newReport) =>{
         // server code to add newReport to server 
-        // change 'index' with 'id' when server is ready
+        
      
         const newReportList = [...ReportList,{...newReport,Name:Auth.user.Name,DateofReport:(new Date()).toJSON()}] ; // assume to be new report list fetched from server
         localStorage.setItem('report_list',JSON.stringify(newReportList))
@@ -748,21 +773,21 @@ export const ReportListProvider = ({ children }) => {
     }
     const updateReportList = (newReport,index) =>{
       // server code to add newReport to server 
-      // change 'index' with 'id' when server is ready
+     
       const newReportList = [...ReportList];  // assume to be new report list fetched from server
       newReportList.splice(index,1,newReport)
       localStorage.setItem('report_list',JSON.stringify([...newReportList]))
       setReportList([...newReportList]);
   }
   const deleteReportList =(id)=>{ // until server comes into play index of range of no of Reports will be used
-// change 'index' with 'id' when server is ready
+
     const newReportList = [...ReportList];  // assume to be new report list fetched from server
     newReportList.splice(id,1)
     localStorage.setItem('report_list',JSON.stringify([...newReportList]))
     setReportList([...newReportList]);
 
   }
-  const [ReportList, setReportList] = useState([{}])
+  const [ReportList, setReportList] = useState([])
   
   return (
     <ReportListContext.Provider value={{ ReportList,addReportList , updateReportList,initializeReportList,deleteReportList}}>

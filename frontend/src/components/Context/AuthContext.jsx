@@ -1,3 +1,4 @@
+// for managing user details (name , email,pwd,profile img url ) and login , logout and updating user details
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AuthContext = createContext(null);
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user,updateUserDetails, login,signin, logout,setuser  }}>
+    <AuthContext.Provider value={{ user,updateUserDetails, login,signin, logout,setuser }}>
       {children}
     </AuthContext.Provider>
   );
