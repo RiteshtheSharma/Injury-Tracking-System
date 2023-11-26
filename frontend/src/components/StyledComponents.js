@@ -26,6 +26,20 @@ color:black;
 const ModLinearSkeleton =styled(Skeleton)`{
   margin-top:2px;
 }`
+const ModSelect = styled.select`{
+    padding: 14px 6px 14px 6px;
+              background-color: white;
+              border:1px solid #ccc;
+              appearance: none;
+              width: 100%;
+              border-radius: 5px;
+              font-size:12px;
+              color:#555;
+  & > .selectable {
+    padding: 13px 5px; 
+    font-weight: bold 
+  }            
+}`
 /* settings components */
 const ModPencilIconLabel = styled.label`{
    display: inline-block;
@@ -40,4 +54,4 @@ const ModPencilIconLabel = styled.label`{
 
 
 
-export {ModLink,ModTableCell,ModLinearSkeleton,TableBodyWithScrollBar,ModPencilIconLabel};
+export {ModLink,ModTableCell,ModLinearSkeleton,TableBodyWithScrollBar,ModPencilIconLabel, ModSelect };
